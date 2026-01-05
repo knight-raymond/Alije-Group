@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Alije Enterprises</title>
+    <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico">
+    <!--<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/logo-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/assets/logo/logo-icon.svg">-->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body>
+<header id="header">
+    <div class="logo-container">
+        <img class="logo" src="/assets/logo/alije-logo-main.png" alt="Alije Enterprises Logo">
+        <div class="company-text">
+            <h1>ALIJE</h1>
+            <p>ENTERPRISES</p>
+        </div>
+    </div>
+    <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <button id="openSidebar" class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<aside id="sidebar" class="sidebar" aria-hidden="true">
+    <div class="close-btn" id="closeSidebar" aria-label="Close menu">x</div>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="products.html">Product Gallery</a>
+    <a href="contact.html">Contact</a>
+</aside>
+
+
+<!-- Intro Section -->
+<section class="aboutus">
+	<div class="intro-section">
+ 	   <div class="intro">
+ 	       <h1>Contact Us – Alije Enterprises</h1>
+ 	       <br><br>
+ 	       <p>At Alije Enterprises, we are committed to building strong global partnerships by providing high-quality engineering goods and reliable export services. Whether you have a product inquiry, need a quotation, or want to discuss long-term supply requirements, we are here to assist you.</p>
+			<br><br> 
+	        <h2>Get in Touch</h2> 
+	        <p><b>Alije Enterprises | Your Trusted Engineering Goods Export Partner from India</b></p><br>
+	        <p><b>Email:</b> enterprisesalije@gmail.com
+	        <br><b>Phone:</b> (+91) 84760 16955</p>
+	        <h3>Business Hours</h3><br>   
+	        <p><b>Monday to Saturday:</b> 9:00 AM – 7:00 PM
+	        <br><b>Sunday:</b> Closed</p>
+	    		    
+	   		<h2>Why Contact Us</h2>
+		    <div class="features">
+			    <div class="feature-card">
+				    <img src="feat02.png" alt="Quality & Expertise">
+				    <h3>Fast response and professional support</h3>
+				    <p>Quick replies and expert assistance for all your queries.</p>
+			    </div>
+			    <div class="feature-card">
+				    <img src="feat03.png" alt="Innovation">
+				    <h3>Global export assistance</h3>
+				    <p>Guidance on shipping, documentation, and smooth international delivery.</p>
+			    </div>
+			    <div class="feature-card">
+				    <img src="feat04.png" alt="Partnerships">
+				    <h3>Product details, pricing, and documentation support</h3>
+				    <p>Clear product specifications, fair pricing, and complete export paperwork.</p>
+			    </div>
+			    <div class="feature-card">
+				    <img src="feat05.png" alt="Problem Solving">
+				    <h3>Customized solutions for bulk and long-term orders</h3>
+				    <p>Flexible supply options tailored for large or ongoing requirements.</p>
+			    </div>
+		    </div>
+		    <br><br>
+		</div>		
+	</div>
+</section>
+      
+<!-- Enquiry Section -->
+<section class="enquiry-section" aria-labelledby="enquiry-heading">
+<h2 id="enquiry-heading">Trade Enquiry</h2>
+<marquee><p style="color: red">
+We are seeking serious buyers who are genuinely interested in doing business with us.
+</p></marquee>
+<form class="enquiry-form" id="enquiryForm" novalidate>
+<div class="form-group">
+<label for="name">Name</label>
+<input type="text" id="name" placeholder="Your Name">
+<small class="error" id="nameError">This field is required</small>
+</div>
+<div class="form-group">
+<label for="email">Email</label>
+<input type="email" id="email" placeholder="Enter Your Email">
+<small class="error" id="emailError">This field is required</small>
+</div>
+<div class="form-group">
+<label for="email">Whatsapp Number</label>
+<input type="tel" id="phone" placeholder="For Quick Response">
+<small class="error" id="phoneError">This field is required</small>
+</div>
+<div class="form-group">
+<label for="country">Country</label>
+<input type="text" id="country" placeholder="Your Country">
+<small class="error" id="countryError">This field is required</small>
+</div>
+<div class="form-group message-box">
+<label for="message">Message</label>
+<textarea id="message" placeholder="Write your message"></textarea>
+<small class="error" id="messageError">This field is required</small>
+</div>
+<button class="enquiry-btn" type="submit" id="emailBtn">Send Enquiry via Email</button>
+<button class="enquiry-btn-wa" type="button" id="whatsappBtn" class="whatsapp-btn">
+Send Enquiry via WhatsApp
+</button>
+</form>
+</div>
+<div id="thankYouPopup">
+<div class="popup-box">
+<h3>Thank You!</h3>
+<p>Your enquiry has been sent successfully.</p>
+<button onclick="closePopup()">OK</button>
+</div>
+</div>
+<div id="whatsappPopup">
+<div class="popup-box">
+<h3>Redirecting...</h3>
+<p>You are redirecting to WhatsApp. Thank you!</p>
+<button onclick="closeWhatsappPopup()">OK</button>
+</div>
+</div>
+<!--ENQUIRY-->
+
+
+<!-- FAQ Section -->
+<section>
+    <div class="faq-container">
+        <h1>Frequently Asked Questions (FAQs)</h1>
+        <div class="faq-item">
+            <div class="faq-question">What is Product Sourcing?</div>
+            <div class="faq-answer">Product sourcing is the process of finding trustworthy manufacturers or suppliers who can produce or deliver quality products that fit your business needs.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What does a sourcing company do?</div>
+            <div class="faq-answer">A sourcing company identifies reliable manufacturers, develops samples, negotiates prices and terms, supervises production quality, and manages global shipping.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">How do you identify qualified suppliers?</div>
+            <div class="faq-answer">We use our extensive database of manufacturers to match your exact requirements. Each potential supplier is evaluated for capability, quality, and reliability before we negotiate optimal pricing and terms.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What quality checks are involved?</div>
+            <div class="faq-answer">Samples are approved before production. Routine inspections are done during manufacturing. Final inspection is done before shipping along with spot checks.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Do I need to order a full container?</div>
+            <div class="faq-answer">No. Depending on your product and order volume, you can choose part-load, mixed-load, or full-container shipping options.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Is there a minimum order quantity?</div>
+            <div class="faq-answer">Yes, most products have an MOQ, but the quantity varies by item.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Do shipments always arrive on schedule?</div>
+            <div class="faq-answer">We aim for timely deliveries, but unexpected factors such as vessel delays, weather, or customs procedures may occasionally impact shipping timelines.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What shipping terms do you follow?</div>
+            <div class="faq-answer">We work with your preferred shipping terms, including Free On Board (FOB), Cost and Freight (CFR), and Cost, Insurance & Freight (CIF).</div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+    <footer class="site-footer">
+  <div class="footer-container">
+
+    <div class="footer-box">
+      <h4>About Us</h4>
+      <p>
+        Alije Group is a trusted sourcing company providing high-quality
+        engineering goods from India to global clients.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h4>Contact</h4>
+      <p>Email: enterprisesalije@gmail.com</p>
+      <p>Phone: +91 84760 16955</p>
+      <p>India</p>
+    </div>
+
+    <div class="footer-box">
+      <h4>Follow Us</h4>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Alije Group. All rights reserved.
+  </div>
+</footer>
+
+<!-- Font Awesome for social icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<script src="/JS/enquiry.js"></script>
+<script src="/JS/script.js"></script>
+</body>
+</html>

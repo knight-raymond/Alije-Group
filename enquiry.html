@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="enquiry.css">
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<!--ENQUIRY-->
+<section class="enquiry-section" aria-labelledby="enquiry-heading">
+<h2 id="enquiry-heading">Trade Enquiry</h2>
+<marquee><p style="color: red">
+We are seeking serious buyers who are genuinely interested in doing business with us.
+</p></marquee>
+<form class="enquiry-form" id="enquiryForm" novalidate>
+<div class="form-group">
+<label for="name">Name</label>
+<input type="text" id="name" placeholder="Your Name">
+<small class="error" id="nameError">This field is required</small>
+</div>
+<div class="form-group">
+<label for="email">Email</label>
+<input type="email" id="email" placeholder="Enter Your Email">
+<small class="error" id="emailError">This field is required</small>
+</div>
+<div class="form-group">
+<label for="email">Whatsapp Number</label>
+<input type="tel" id="phone" placeholder="For Quick Response">
+<small class="error" id="phoneError">This field is required</small>
+</div>
+<div class="form-group">
+<label for="country">Country</label>
+<input type="text" id="country" placeholder="Your Country">
+<small class="error" id="countryError">This field is required</small>
+</div>
+<div class="form-group message-box">
+<label for="message">Message</label>
+<textarea id="message" placeholder="Write your message"></textarea>
+<small class="error" id="messageError">This field is required</small>
+</div>
+<button class="enquiry-btn" type="submit" id="emailBtn">Send Enquiry via Email</button>
+<button class="enquiry-btn-wa" type="button" id="whatsappBtn" class="whatsapp-btn">
+Send Enquiry via WhatsApp
+</button>
