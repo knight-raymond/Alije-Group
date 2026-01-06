@@ -375,73 +375,69 @@ inset: 0;
 background: rgba(0,0,0,0.6);
 }
 .popup-overlay {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
 }
 .popup-popup {
-  position: relative;
-  margin: auto;
-  max-width: 360px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 90%;
-  background: #fff;
-  border-radius: 16px;
+  max-width: 360px;
+  background: #ffffff;
   padding: 30px 25px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-  animation: popupScale 0.3s ease;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
 }
 .popup-icon {
   width: 65px;
   height: 65px;
+  margin: 0 auto 18px;
   background: #4CAF50;
-  color: #fff;
+  color: #ffffff;
   font-size: 30px;
   font-weight: bold;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 18px;
 }
 .popup-popup h2 {
   margin-bottom: 10px;
-  color: #333;
+  color: #333333;
 }
 .popup-popup p {
-  font-size: 14px;
-  color: #666;
   margin-bottom: 22px;
+  font-size: 14px;
+  color: #666666;
 }
 .popup-ok-btn {
   padding: 10px 32px;
   border: none;
+  border-radius: 25px;
   background: #4CAF50;
-  color: #fff;
+  color: #ffffff;
   font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s ease;
 }
 .popup-ok-btn:hover {
   background: #43a047;
 }
-@keyframes popupScale {
-  from {
-    transform: scale(0.7);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.popup-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.popup-overlay[style*="block"] {
+  opacity: 1;
 }
 .faq-container {  
 max-width: 600px;  
