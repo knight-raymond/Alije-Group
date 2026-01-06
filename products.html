@@ -1,39 +1,128 @@
-<link rel="stylesheet" href="enquiry.css">
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Alije Group</title>
+    <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico">
+    <!--<link rel="icon" type="image/png" sizes="32x32" href="assets/logo/logo-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/assets/logo/logo-icon.svg">-->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body>
+<header id="header">
+    <div class="logo-container">
+        <img class="logo" src="assets/logo/alije-logo-main.png" alt="Alije Group Logo">
+        <div class="company-text">
+            <h1>ALIJE</h1>
+            <p>GROUP</p>
+        </div>
+    </div>
+    <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <button id="openSidebar" class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
 
-<!--ENQUIRY-->
-<section class="enquiry-section" aria-labelledby="enquiry-heading">
-<h2 id="enquiry-heading">Trade Enquiry</h2>
-<marquee><p style="color: red">
-We are seeking serious buyers who are genuinely interested in doing business with us.
-</p></marquee>
-<form class="enquiry-form" id="enquiryForm" novalidate>
-<div class="form-group">
-<label for="name">Name</label>
-<input type="text" id="name" placeholder="Your Name">
-<small class="error" id="nameError">This field is required</small>
+<aside id="sidebar" class="sidebar" aria-hidden="true">
+    <div class="close-btn" id="closeSidebar" aria-label="Close menu">x</div>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="products.html">Product Gallery</a>
+    <a href="contact.html">Contact</a>
+</aside>
+
+<section class="about-us">
+<section class="photo-gallery">
+  <div class="photo-grid">
+
+    <div class="photo-item size-1x1">
+      <img src="https://picsum.photos/id/1011/800/800">
+    </div>
+
+    <div class="photo-item size-1x2">
+      <img src="https://picsum.photos/id/1025/800/1200">
+    </div>
+
+    <div class="photo-item size-2x1">
+      <img src="https://picsum.photos/id/1035/1200/800">
+    </div>
+
+    <div class="photo-item size-1x1">
+      <img src="https://picsum.photos/id/1041/800/800">
+    </div>
+
+    <div class="photo-item size-2x2">
+      <img src="https://picsum.photos/id/1050/1200/1200">
+    </div>
+
+    <div class="photo-item size-1x1">
+      <img src="https://picsum.photos/id/1060/800/800">
+    </div>
+
+  </div>
+</section>
+
+<div class="fullscreen-view" id="fullscreenView">
+  <span class="close-btn" id="closeBtn">&times;</span>
+  <img id="fullscreenImg">
 </div>
-<div class="form-group">
-<label for="email">Email</label>
-<input type="email" id="email" placeholder="Enter Your Email">
-<small class="error" id="emailError">This field is required</small>
-</div>
-<div class="form-group">
-<label for="email">Whatsapp Number</label>
-<input type="tel" id="phone" placeholder="For Quick Response">
-<small class="error" id="phoneError">This field is required</small>
-</div>
-<div class="form-group">
-<label for="country">Country</label>
-<input type="text" id="country" placeholder="Your Country">
-<small class="error" id="countryError">This field is required</small>
-</div>
-<div class="form-group message-box">
-<label for="message">Message</label>
-<textarea id="message" placeholder="Write your message"></textarea>
-<small class="error" id="messageError">This field is required</small>
-</div>
-<button class="enquiry-btn" type="submit" id="emailBtn">Send Enquiry via Email</button>
-<button class="enquiry-btn-wa" type="button" id="whatsappBtn" class="whatsapp-btn">
-Send Enquiry via WhatsApp
-</button>
+</section>
+
+
+
+<!-- Footer -->
+    <footer class="site-footer">
+  <div class="footer-container">
+
+    <div class="footer-box">
+      <h4>About Us</h4>
+      <p>
+        Alije Group is a trusted sourcing company providing high-quality
+        engineering goods from India to global clients.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h4>Contact</h4>
+      <p>Email: enterprisesalije@gmail.com</p>
+      <p>Phone: +91 84760 16955</p>
+      <p>India</p>
+    </div>
+
+    <div class="footer-box">
+      <h4>Follow Us</h4>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Alije Group. All rights reserved.
+  </div>
+</footer>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<script src="script.js"></script>
+</body>
+</html>
