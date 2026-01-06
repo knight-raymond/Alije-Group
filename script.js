@@ -58,7 +58,7 @@ function init() {
     const images = document.querySelectorAll(".photo-item img");
     const fullscreenView = document.getElementById("fullscreenView");
     const fullscreenImg = document.getElementById("fullscreenImg");
-    const previewCloseBtn = document.getElementById("closeBtn");
+    const previewCloseBtn = document.getElementById("previewcloseBtn");
 
     images.forEach(img => {
         img.addEventListener("click", () => {
