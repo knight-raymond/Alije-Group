@@ -35,7 +35,8 @@ document.getElementById("enquiryForm").addEventListener("submit", function (e) {
   emailjs.send("service_5v70fm7", "template_pl8pwbl", params)
     .then(() => {
       document.getElementById("thankYouPopup").style.display = "block";
-      document.getElementById("enquiryForm").reset();
+document.body.classList.add("no-scroll");
+    document.getElementById("enquiryForm").reset();
       submitBtn.disabled = false;
       submitBtn.innerText = "Send Enquiry (Email)";
     })
@@ -62,6 +63,7 @@ Message: ${params.message}`
   );
 
   document.getElementById("whatsappPopup").style.display = "block";
+document.body.classList.add("no-scroll");
 
   setTimeout(() => {
     window.open(
@@ -112,8 +114,10 @@ function getFormData() {
 
 function closePopup() {
   document.getElementById("thankYouPopup").style.display = "none";
+document.body.classList.remove("no-scroll");
 }
 
 function closeWhatsappPopup() {
   document.getElementById("whatsappPopup").style.display = "none";
+document.body.classList.remove("no-scroll");
 }
