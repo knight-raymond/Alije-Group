@@ -393,13 +393,13 @@ background: rgba(0,0,0,0.6);
   max-width: 360px;
   background: #ffffff;
   padding: 30px 25px;
-  border-radius: 16px;
+  border-radius: 12px;
   text-align: center;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
 }
 .popup-icon {
-  width: 65px;
-  height: 65px;
+  width: 60px;
+  height: 60px;
   margin: 0 auto 18px;
   background: #4CAF50;
   color: #ffffff;
@@ -422,15 +422,15 @@ background: rgba(0,0,0,0.6);
 .popup-ok-btn {
   padding: 10px 32px;
   border: none;
-  border-radius: 25px;
-  background: #4CAF50;
+  border-radius: 10px;
+  background: #1a73e8;
   color: #ffffff;
   font-size: 15px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 .popup-ok-btn:hover {
-  background: #43a047;
+  background: #0044af;
 }
 .popup-overlay {
   opacity: 0;
