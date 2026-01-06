@@ -31,7 +31,7 @@
 </header>
 
 <aside id="sidebar" class="sidebar" aria-hidden="true">
-    <div class="close-btn" id="closeSidebar" aria-label="Close menu">x</div>
+    <div class="close-btn" id="closeSidebar" aria-label="Close menu">×</div>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="products.html">Product Gallery</a>
@@ -58,22 +58,22 @@
 	   		<h2>Why Contact Us</h2>
 		    <div class="features">
 			    <div class="feature-card">
-				    <img src="feat02.png" alt="Quality & Expertise">
+				    <img src="assets/icons/ic-feat/FEATURE-ICON-002.png" alt="Quality & Expertise">
 				    <h3>Fast response and professional support</h3>
 				    <p>Quick replies and expert assistance for all your queries.</p>
 			    </div>
 			    <div class="feature-card">
-				    <img src="feat03.png" alt="Innovation">
+				    <img src="assets/icons/ic-feat/FEATURE-ICON-003.png" alt="Innovation">
 				    <h3>Global export assistance</h3>
 				    <p>Guidance on shipping, documentation, and smooth international delivery.</p>
 			    </div>
 			    <div class="feature-card">
-				    <img src="feat04.png" alt="Partnerships">
+				    <img src="assets/icons/ic-feat/FEATURE-ICON-004.png" alt="Partnerships">
 				    <h3>Product details, pricing, and documentation support</h3>
 				    <p>Clear product specifications, fair pricing, and complete export paperwork.</p>
 			    </div>
 			    <div class="feature-card">
-				    <img src="feat05.png" alt="Problem Solving">
+				    <img src="assets/icons/ic-feat/FEATURE-ICON-005.png" alt="Problem Solving">
 				    <h3>Customized solutions for bulk and long-term orders</h3>
 				    <p>Flexible supply options tailored for large or ongoing requirements.</p>
 			    </div>
@@ -84,57 +84,60 @@
 </section>
       
 <!-- Enquiry Section -->
-<section class="enquiry-section" aria-labelledby="enquiry-heading">
-<h2 id="enquiry-heading">Trade Enquiry</h2>
-<marquee><p style="color: red">
-We are seeking serious buyers who are genuinely interested in doing business with us.
-</p></marquee>
-<form class="enquiry-form" id="enquiryForm" novalidate>
-<div class="form-group">
-<label for="name">Name</label>
-<input type="text" id="name" placeholder="Your Name">
-<small class="error" id="nameError">This field is required</small>
-</div>
-<div class="form-group">
-<label for="email">Email</label>
-<input type="email" id="email" placeholder="Enter Your Email">
-<small class="error" id="emailError">This field is required</small>
-</div>
-<div class="form-group">
-<label for="email">Whatsapp Number</label>
-<input type="tel" id="phone" placeholder="For Quick Response">
-<small class="error" id="phoneError">This field is required</small>
-</div>
-<div class="form-group">
-<label for="country">Country</label>
-<input type="text" id="country" placeholder="Your Country">
-<small class="error" id="countryError">This field is required</small>
-</div>
-<div class="form-group message-box">
-<label for="message">Message</label>
-<textarea id="message" placeholder="Write your message"></textarea>
-<small class="error" id="messageError">This field is required</small>
-</div>
-<button class="enquiry-btn" type="submit" id="emailBtn">Send Enquiry via Email</button>
-<button class="enquiry-btn-wa" type="button" id="whatsappBtn" class="whatsapp-btn">
-Send Enquiry via WhatsApp
-</button>
-</form>
-</div>
-<div id="thankYouPopup">
-<div class="popup-box">
-<h3>Thank You!</h3>
-<p>Your enquiry has been sent successfully.</p>
-<button onclick="closePopup()">OK</button>
-</div>
-</div>
-<div id="whatsappPopup">
-<div class="popup-box">
-<h3>Redirecting...</h3>
-<p>You are redirecting to WhatsApp. Thank you!</p>
-<button onclick="closeWhatsappPopup()">OK</button>
-</div>
-</div>
+        <section class="enquiry-section" aria-labelledby="enquiry-heading">
+            <h2 id="enquiry-heading">Trade Enquiry</h2>
+            <marquee><p style="color: red">
+            We are seeking serious buyers who are genuinely interested in doing business with us.                
+            </p>
+            </marquee>
+            <form class="enquiry-form" id="enquiryForm" novalidate>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Your Name">
+                    <small class="error" id="nameError">This field is required</small>                    
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter Your Email">
+                    <small class="error" id="emailError">This field is required</small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Whatsapp Number</label>
+                    <input type="tel" id="phone" placeholder="For Quick Response">
+                    <small class="error" id="phoneError">This field is required</small>                    
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" placeholder="Your Country">
+                    <small class="error" id="countryError">This field is required</small>                    
+                </div>
+                <div class="form-group message-box">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Write your message"></textarea>
+                    <small class="error" id="messageError">This field is required</small>                    
+                </div>
+                <button class="enquiry-btn" type="submit" id="emailBtn">Send Enquiry via Email</button>
+                <button class="enquiry-btn-wa" type="button" id="whatsappBtn" class="whatsapp-btn">
+                    Send Enquiry via WhatsApp                    
+                </button>                
+            </form>           
+        </section>
+        <div class="popup-overlay" id="thankYouPopup">
+            <div class="popup-popup">
+                <div class="popup-icon">&#10004;</div>               
+                <h2>Thank You!</h2>
+                <p>Your enquiry has been received successfully.</p>
+                <button class="popup-ok-btn" onclick="closePopup()">OK</button>                
+            </div>            
+        </div>               
+        <div class="popup-overlay" id="whatsappPopup">
+            <div class="popup-popup">
+                <div class="popup-icon">&#10004;</div>
+                <h2>Redirecting...</h2>
+                <p>You are redirecting to WhatsApp. Thank you!</p>
+                <button class="popup-ok-btn" onclick="closeWhatsappPopup()">OK</button>                
+            </div>            
+        </div>
 <!--ENQUIRY-->
 
 
