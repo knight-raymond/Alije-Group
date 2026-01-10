@@ -1,30 +1,31 @@
 function init() {
+
     /* ================= HEADER SHRINK ================= */
-    const header = document.getElementById("header");
-    header && window.addEventListener("scroll", () => {
-        header.classList.toggle("shrink", window.scrollY > 50);
+    window.addEventListener("scroll", () => {
+        const header = document.querySelector("#header header");
+        header && header.classList.toggle("shrink", window.scrollY > 50);
     });
 
 
     /* ================= SIDEBAR ================= */
-    const sidebar = document.getElementById("sidebar");
-    const openBtn = document.getElementById("openSidebar");
-    const closeBtn = document.getElementById("closeSidebar");
-
     function openSidebar() {
+        const sidebar = document.getElementById("sidebar");
         if (!sidebar) return;
         sidebar.classList.add("open");
         document.body.classList.add("no-scroll");
     }
 
     function closeSidebar() {
+        const sidebar = document.getElementById("sidebar");
         if (!sidebar) return;
         sidebar.classList.remove("open");
         document.body.classList.remove("no-scroll");
     }
 
-    openBtn && openBtn.addEventListener("click", openSidebar);
-    closeBtn && closeBtn.addEventListener("click", closeSidebar);
+    document.addEventListener("click", (e) => {
+        if (e.target.closest("#openSidebar")) openSidebar();
+        if (e.target.closest("#closeSidebar")) closeSidebar();
+    });
 
     window.addEventListener("resize", () => {
         if (window.innerWidth > 920) closeSidebar();
@@ -39,7 +40,7 @@ function init() {
             a.classList.toggle("active-link", href === current);
         });
     }
-    setActiveLink();
+    setTimeout(setActiveLink, 50);
 
 
     /* ================= FAQ ================= */
@@ -72,9 +73,7 @@ function init() {
     });
 
     fullscreenView && fullscreenView.addEventListener("click", e => {
-        if (e.target === fullscreenView) {
-            fullscreenView.classList.remove("active");
-        }
+        if (e.target === fullscreenView) fullscreenView.classList.remove("active");
     });
 
     document.addEventListener("keydown", e => {
@@ -83,7 +82,6 @@ function init() {
             closeSidebar();
         }
     });
-
 }
 
 /* INIT ON LOAD */
