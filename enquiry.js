@@ -114,9 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function getFormData() {
     return {
-      name:    (document.getElementById("name")?.value    || "").trim(),
-      email:   (document.getElementById("email")?.value   || "").trim(),
-      phone:   (document.getElementById("phone")?.value   || "").trim(),
+      name: (document.getElementById("name")?.value || "").trim(),
+      email: (document.getElementById("email")?.value || "").trim(),
+      phone: (document.getElementById("phone")?.value || "").trim(),
       country: (document.getElementById("country")?.value || "").trim(),
       message: (document.getElementById("message")?.value || "").trim(),
     };

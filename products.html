@@ -1,81 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Gallery | Alije Group</title>
-  <meta name="description" content="Browse Alije Group's full product gallery — brass, rubber beading, SS, automotive, machined parts and more.">
+  <meta name="description"
+    content="Browse Alije Group's full product gallery — brass, rubber beading, SS, automotive, machined parts and more.">
   <link rel="icon" type="image/x-icon" href="assets/logo/favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .filter-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:32px auto 40px;max-width:960px;padding:0 20px}
-    .filter-btn{padding:8px 20px;border:1.5px solid var(--clr-border);border-radius:100px;background:var(--clr-white);color:var(--clr-muted);font-family:var(--font-head);font-size:13.5px;font-weight:600;cursor:pointer;transition:all .2s ease;white-space:nowrap}
-    .filter-btn:hover{border-color:var(--clr-primary);color:var(--clr-primary)}
-    .filter-btn.active{background:var(--clr-primary);border-color:var(--clr-primary);color:#fff;box-shadow:0 4px 14px rgba(16,85,198,.28)}
-    .pg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px;max-width:1280px;margin:0 auto;padding:0 40px 60px}
-    .pg-card{background:var(--clr-white);border:1px solid var(--clr-border);border-radius:var(--radius-md);overflow:hidden;cursor:pointer;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
-    .pg-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.12)}
-    .pg-card[data-hidden="true"]{display:none}
-    .pg-img-wrap{position:relative;overflow:hidden;height:220px;background:var(--clr-surface)}
-    .pg-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s;display:block}
-    .pg-card:hover .pg-img-wrap img{transform:scale(1.06)}
-    .pg-badge{position:absolute;top:12px;left:12px;background:var(--clr-primary);color:#fff;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:4px 10px;border-radius:100px}
-    .pg-zoom-hint{position:absolute;inset:0;background:rgba(16,85,198,.42);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;pointer-events:none}
-    .pg-zoom-hint i{font-size:28px;color:#fff}
-    .pg-card:hover .pg-zoom-hint{opacity:1}
-    .pg-body{padding:16px 18px 20px;flex:1;display:flex;flex-direction:column;gap:8px}
-    .pg-name{font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--clr-text);line-height:1.35}
-    .pg-desc{font-size:13.5px;color:var(--clr-muted);line-height:1.55;flex:1}
-    .pg-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-    .pg-tag{font-size:11.5px;font-weight:600;color:var(--clr-primary);background:rgba(16,85,198,.08);border-radius:4px;padding:3px 8px}
-    .pg-view-btn{margin-top:10px;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--clr-primary);transition:gap .2s}
-    .pg-card:hover .pg-view-btn{gap:10px}
-    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(5,10,24,.72);z-index:9000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
-    .modal-overlay.open{display:flex}
-    .modal-box{background:var(--clr-white);border-radius:var(--radius-lg);width:100%;max-width:860px;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;animation:modalIn .28s ease}
-    @keyframes modalIn{from{opacity:0;transform:scale(.94) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
-    .modal-img-col{position:relative;background:var(--clr-surface);border-radius:var(--radius-lg) 0 0 var(--radius-lg);overflow:hidden;min-height:380px;display:flex;flex-direction:column}
-    .modal-main-img{width:100%;flex:1;object-fit:cover;display:block}
-    .modal-thumbs{display:flex;gap:6px;padding:10px 12px;background:rgba(0,0,0,.04);flex-wrap:wrap}
-    .modal-thumb{width:54px;height:54px;border-radius:8px;overflow:hidden;border:2.5px solid transparent;cursor:pointer;transition:border-color .2s;flex-shrink:0}
-    .modal-thumb.active{border-color:var(--clr-primary)}
-    .modal-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .modal-info-col{padding:32px 28px 28px;display:flex;flex-direction:column;gap:14px;position:relative;overflow-y:auto}
-    .modal-close{position:absolute;top:14px;right:16px;font-size:26px;color:var(--clr-muted);cursor:pointer;line-height:1;background:none;border:none;transition:color .18s}
-    .modal-close:hover{color:var(--clr-text)}
-    .modal-badge{display:inline-block;background:rgba(16,85,198,.1);color:var(--clr-primary);font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:4px 12px;border-radius:100px;width:fit-content}
-    .modal-title{font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--clr-text);line-height:1.3;padding-right:28px}
-    .modal-desc{font-size:14px;color:var(--clr-muted);line-height:1.7}
-    .modal-specs{border-top:1px solid var(--clr-border);padding-top:14px}
-    .modal-specs h4{font-family:var(--font-head);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--clr-muted);margin-bottom:10px}
-    .spec-row{display:flex;align-items:flex-start;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px solid var(--clr-surface)}
-    .spec-row:last-child{border-bottom:none}
-    .spec-key{font-weight:700;color:var(--clr-text);min-width:100px;flex-shrink:0}
-    .spec-val{color:var(--clr-muted);line-height:1.5}
-    .modal-tags{display:flex;flex-wrap:wrap;gap:6px}
-    .modal-tag{font-size:12px;font-weight:600;color:var(--clr-accent-d);background:rgba(0,184,148,.1);border-radius:4px;padding:4px 10px}
-    .modal-enquiry-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;background:var(--clr-primary);color:#fff;font-family:var(--font-head);font-weight:700;font-size:14px;border-radius:var(--radius-sm);text-decoration:none;border:none;cursor:pointer;margin-top:auto;transition:background .2s,transform .2s}
-    .modal-enquiry-btn:hover{background:var(--clr-primary-d);transform:translateY(-1px)}
-    .pg-empty{display:none;grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--clr-muted);font-size:16px}
-    .pg-empty i{font-size:40px;margin-bottom:14px;display:block;color:var(--clr-border)}
-    @media(max-width:700px){.modal-box{grid-template-columns:1fr;max-height:93vh}.modal-img-col{border-radius:var(--radius-lg) var(--radius-lg) 0 0;min-height:220px}.modal-info-col{padding:20px 18px 24px}.pg-grid{padding:0 16px 48px}}
-    @media(max-width:420px){.pg-grid{grid-template-columns:1fr 1fr;gap:10px}.pg-img-wrap{height:150px}.pg-body{padding:10px 12px 12px}.pg-name{font-size:12.5px}.pg-desc,.pg-tags,.pg-view-btn{display:none}}
-  </style>
 </head>
+
 <body>
 
   <header id="site-header">
     <div class="logo-container">
       <a href="index.html"><img class="logo" src="assets/logo/alije-logo-main.png" alt="Alije Group Logo"></a>
-      <div class="company-text"><h1>ALIJE</h1><p>GROUP</p></div>
+      <div class="company-text">
+        <h1>ALIJE</h1>
+        <p>GROUP</p>
+      </div>
     </div>
     <nav class="nav-links" aria-label="Primary navigation">
       <a href="index.html">Home</a>
-      <a href="products.html" class="active-link">Gallery</a>
+      <a href="products.html" class="active-link">Products</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
     </nav>
@@ -86,7 +40,7 @@
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <span class="close-btn" id="closeSidebar" role="button" tabindex="0">&times;</span>
     <a href="index.html">Home</a>
-    <a href="products.html" class="active-link">Products Gallery</a>
+    <a href="products.html" class="active-link">Products</a>
     <a href="about.html">About Us</a>
     <a href="contact.html">Contact Us</a>
   </aside>
@@ -95,64 +49,556 @@
     <div class="gallery-header" style="margin-top:80px">
       <div class="section-label">Our Products</div>
       <h1 class="section-title">Product Gallery</h1>
-      <p class="section-desc" style="margin:0 auto">38 products across 6 categories. Click any card to view full specifications and details.</p>
+      <p class="section-desc" style="margin:0 auto">38 products across 6 categories. Click any card to view full
+        specifications and details.</p>
     </div>
 
     <div class="filter-bar" id="filterBar" role="group" aria-label="Filter by category">
       <button class="filter-btn active" data-cat="all">All Products</button>
-      <button class="filter-btn" data-cat="rubber-beading">Rubber Beading</button>
       <button class="filter-btn" data-cat="brass">Brass Components</button>
       <button class="filter-btn" data-cat="panels">Panels &amp; Covers</button>
       <button class="filter-btn" data-cat="machined">Machined Parts</button>
       <button class="filter-btn" data-cat="ss">SS &amp; Rods</button>
       <button class="filter-btn" data-cat="automotive">Automotive</button>
+      <button class="filter-btn" data-cat="rubber-beading">Rubber Beading</button>
     </div>
 
     <section class="pg-grid" id="pgGrid" aria-label="Product cards">
-      <!-- RUBBER BEADING -->
-      <div class="pg-card" data-cat="rubber-beading" data-id="bid-001b"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-001B.jpg" alt="Black Rubber Beading Style 1" loading="lazy"><span class="pg-badge">Rubber Beading</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Rubber Beading — Black (Style 1)</div><div class="pg-desc">Flexible black EPDM edge beading for sealing and vibration dampening in machine panels and enclosures.</div><div class="pg-tags"><span class="pg-tag">Black</span><span class="pg-tag">EPDM</span><span class="pg-tag">Custom Sizes</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="rubber-beading" data-id="bid-001w"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-001W.jpg" alt="White Rubber Beading" loading="lazy"><span class="pg-badge">Rubber Beading</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Rubber Beading — White (Style 1)</div><div class="pg-desc">White EPDM edge beading for aesthetic edge protection on control panels and machine frames.</div><div class="pg-tags"><span class="pg-tag">White</span><span class="pg-tag">EPDM</span><span class="pg-tag">Custom Sizes</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="rubber-beading" data-id="bid-001c"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-001C.jpg" alt="Rubber Beading Colour Range" loading="lazy"><span class="pg-badge">Rubber Beading</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Rubber Beading — Colour Range</div><div class="pg-desc">Available in black, white, and grey across various cross-section profiles for industrial sealing.</div><div class="pg-tags"><span class="pg-tag">Multi-colour</span><span class="pg-tag">Various Profiles</span><span class="pg-tag">OEM</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="rubber-beading" data-id="bid-002b"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-002B.jpg" alt="Black Rubber Beading Style 2" loading="lazy"><span class="pg-badge">Rubber Beading</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Rubber Beading — Black (Style 2)</div><div class="pg-desc">Heavy-duty wide-profile black beading for thicker sheet metal panels and structural frames.</div><div class="pg-tags"><span class="pg-tag">Black</span><span class="pg-tag">Heavy Duty</span><span class="pg-tag">Wide Profile</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="rubber-beading" data-id="bid-002w"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-002W.jpg" alt="White Rubber Beading Style 2" loading="lazy"><span class="pg-badge">Rubber Beading</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Rubber Beading — White (Style 2)</div><div class="pg-desc">Wide-profile white beading for electrical enclosures requiring dust and moisture protection.</div><div class="pg-tags"><span class="pg-tag">White</span><span class="pg-tag">IP54</span><span class="pg-tag">Wide Profile</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="rubber-beading" data-id="bid-003w"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-003W.jpg" alt="White Rubber Beading Style 3" loading="lazy"><span class="pg-badge">Rubber Beading</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Rubber Beading — White (Style 3)</div><div class="pg-desc">Slim-profile white beading for precision electronics and medical equipment enclosures.</div><div class="pg-tags"><span class="pg-tag">White</span><span class="pg-tag">Slim Profile</span><span class="pg-tag">Medical Grade</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="rubber-beading" data-id="bid-004"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-004.jpg" alt="Rubber Beading Style 4" loading="lazy"><span class="pg-badge">Rubber Beading</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Rubber Beading — Style 4</div><div class="pg-desc">Specialised beading with unique cross-section for curved or irregular edge profiles.</div><div class="pg-tags"><span class="pg-tag">Special Profile</span><span class="pg-tag">Curved Edge</span><span class="pg-tag">Automotive</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="rubber-beading" data-id="bid-005"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-005.jpg" alt="Rubber Beading Style 5" loading="lazy"><span class="pg-badge">Rubber Beading</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Rubber Beading — Style 5</div><div class="pg-desc">Multipurpose beading for automotive, industrial, and electronics enclosures. Bulk roll supply.</div><div class="pg-tags"><span class="pg-tag">Multipurpose</span><span class="pg-tag">Automotive</span><span class="pg-tag">Roll Supply</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
       <!-- BRASS -->
-      <div class="pg-card" data-cat="brass" data-id="brass-001"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BRASS-001.jpg" alt="Brass Set A" loading="lazy"><span class="pg-badge">Brass</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Brass Machined Components — Set A</div><div class="pg-desc">Precision CNC-turned brass fittings, inserts, and connectors to IS 319 Grade I/II specification.</div><div class="pg-tags"><span class="pg-tag">IS 319</span><span class="pg-tag">CNC Turned</span><span class="pg-tag">Natural Finish</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="brass" data-id="brass-002"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BRASS-002.jpg" alt="Brass Set B" loading="lazy"><span class="pg-badge">Brass</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Brass Machined Components — Set B</div><div class="pg-desc">EN 12164 CW614N / CW617N grade brass nuts, bolts, nipples, and custom turned components.</div><div class="pg-tags"><span class="pg-tag">EN 12164</span><span class="pg-tag">Nickel Plated</span><span class="pg-tag">OEM</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="brass" data-id="brass-003"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BRASS-003.jpg" alt="Brass Set C" loading="lazy"><span class="pg-badge">Brass</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Brass Machined Components — Set C</div><div class="pg-desc">BS 2874 CZ121/CZ122 free-machining brass with polished mirror surface, no burrs.</div><div class="pg-tags"><span class="pg-tag">BS 2874 CZ121</span><span class="pg-tag">Mirror Polish</span><span class="pg-tag">Burr-Free</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="brass" data-id="brass-004"><div class="pg-img-wrap"><img src="assets/images/products/MECH-BRASS-004.jpg" alt="Brass Set D" loading="lazy"><span class="pg-badge">Brass</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Brass Machined Components — Set D</div><div class="pg-desc">ASTM B16 C36000 free-cutting brass fittings and precision assemblies to customer CAD/drawings.</div><div class="pg-tags"><span class="pg-tag">ASTM B16</span><span class="pg-tag">Multi-Finish</span><span class="pg-tag">CAD Driven</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
+      <div class="pg-card" data-cat="brass" data-id="brass-001">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BRASS-001.jpg" alt="Brass Set A"
+            loading="lazy"><span class="pg-badge">Brass</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Brass Machined Components — Set A</div>
+          <div class="pg-desc">Precision CNC-turned brass fittings, inserts, and connectors to IS 319 Grade I/II
+            specification.</div>
+          <div class="pg-tags"><span class="pg-tag">IS 319</span><span class="pg-tag">CNC Turned</span><span
+              class="pg-tag">Natural Finish</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="brass" data-id="brass-002">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BRASS-002.jpg" alt="Brass Set B"
+            loading="lazy"><span class="pg-badge">Brass</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Brass Machined Components — Set B</div>
+          <div class="pg-desc">EN 12164 CW614N / CW617N grade brass nuts, bolts, nipples, and custom turned components.
+          </div>
+          <div class="pg-tags"><span class="pg-tag">EN 12164</span><span class="pg-tag">Nickel Plated</span><span
+              class="pg-tag">OEM</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="brass" data-id="brass-003">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BRASS-003.jpg" alt="Brass Set C"
+            loading="lazy"><span class="pg-badge">Brass</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Brass Machined Components — Set C</div>
+          <div class="pg-desc">BS 2874 CZ121/CZ122 free-machining brass with polished mirror surface, no burrs.</div>
+          <div class="pg-tags"><span class="pg-tag">BS 2874 CZ121</span><span class="pg-tag">Mirror Polish</span><span
+              class="pg-tag">Burr-Free</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="brass" data-id="brass-004">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BRASS-004.jpg" alt="Brass Set D"
+            loading="lazy"><span class="pg-badge">Brass</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Brass Machined Components — Set D</div>
+          <div class="pg-desc">ASTM B16 C36000 free-cutting brass fittings and precision assemblies to customer
+            CAD/drawings.</div>
+          <div class="pg-tags"><span class="pg-tag">ASTM B16</span><span class="pg-tag">Multi-Finish</span><span
+              class="pg-tag">CAD Driven</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
       <!-- PANELS -->
-      <div class="pg-card" data-cat="panels" data-id="penal-001"><div class="pg-img-wrap"><img src="assets/images/products/MECH-PENAL-001.jpg" alt="Machine Panel 1" loading="lazy"><span class="pg-badge">Panels &amp; Covers</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Machine Panel — Powder Coat (Set 1)</div><div class="pg-desc">CRCA sheet metal panel with electrostatic powder coat finish for industrial enclosures.</div><div class="pg-tags"><span class="pg-tag">CRCA Steel</span><span class="pg-tag">Powder Coat</span><span class="pg-tag">IP54/65</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="panels" data-id="penal-002"><div class="pg-img-wrap"><img src="assets/images/products/MECH-PENAL-002.jpg" alt="Machine Panel 2" loading="lazy"><span class="pg-badge">Panels &amp; Covers</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Machine Panel — Powder Coat (Set 2)</div><div class="pg-desc">Formed and punched panel with DIN rail provisions and durable powder coat surface.</div><div class="pg-tags"><span class="pg-tag">DIN Rail</span><span class="pg-tag">CNC Punch</span><span class="pg-tag">IP54/65</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="panels" data-id="penal-003"><div class="pg-img-wrap"><img src="assets/images/products/MECH-PENAL-003.jpg" alt="Machine Panel 3" loading="lazy"><span class="pg-badge">Panels &amp; Covers</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Machine Panel — Powder Coat (Set 3)</div><div class="pg-desc">Large-format multi-zone panel with reinforced bends for heavy machinery enclosures.</div><div class="pg-tags"><span class="pg-tag">Large Format</span><span class="pg-tag">Reinforced</span><span class="pg-tag">Multi-coat</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="panels" data-id="penal-004"><div class="pg-img-wrap"><img src="assets/images/products/MECH-PENAL-004.jpg" alt="Machine Panel 4" loading="lazy"><span class="pg-badge">Panels &amp; Covers</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Machine Panel &amp; Cover (Set 4)</div><div class="pg-desc">Complete panel and cover assembly with powder coat — ready for control system integration.</div><div class="pg-tags"><span class="pg-tag">Panel + Cover</span><span class="pg-tag">Ready Assembly</span><span class="pg-tag">Custom RAL</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="panels" data-id="cover-001"><div class="pg-img-wrap"><img src="assets/images/products/MECH-COVER-001.jpg" alt="Terminal Cover" loading="lazy"><span class="pg-badge">Panels &amp; Covers</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Terminal Cover — White Powder Coat</div><div class="pg-desc">White electrostatic powder-coated terminal cover. Snap-fit or screw-fixed variants available.</div><div class="pg-tags"><span class="pg-tag">RAL 9016</span><span class="pg-tag">Snap-fit</span><span class="pg-tag">Screw-fix</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="panels" data-id="cover-bat"><div class="pg-img-wrap"><img src="assets/images/products/MECH-COVER-BATTERY-001.jpg" alt="Battery Box" loading="lazy"><span class="pg-badge">Panels &amp; Covers</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Battery Box with Holding Clamp</div><div class="pg-desc">White powder-coated battery enclosure with integrated clamp for securing packs in control panels.</div><div class="pg-tags"><span class="pg-tag">White</span><span class="pg-tag">Integrated Clamp</span><span class="pg-tag">UPS</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
+      <div class="pg-card" data-cat="panels" data-id="penal-001">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-PENAL-001.jpg" alt="Machine Panel 1"
+            loading="lazy"><span class="pg-badge">Panels &amp; Covers</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Machine Panel — Powder Coat (Set 1)</div>
+          <div class="pg-desc">CRCA sheet metal panel with electrostatic powder coat finish for industrial enclosures.
+          </div>
+          <div class="pg-tags"><span class="pg-tag">CRCA Steel</span><span class="pg-tag">Powder Coat</span><span
+              class="pg-tag">IP54/65</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="panels" data-id="penal-002">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-PENAL-002.jpg" alt="Machine Panel 2"
+            loading="lazy"><span class="pg-badge">Panels &amp; Covers</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Machine Panel — Powder Coat (Set 2)</div>
+          <div class="pg-desc">Formed and punched panel with DIN rail provisions and durable powder coat surface.</div>
+          <div class="pg-tags"><span class="pg-tag">DIN Rail</span><span class="pg-tag">CNC Punch</span><span
+              class="pg-tag">IP54/65</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="panels" data-id="penal-003">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-PENAL-003.jpg" alt="Machine Panel 3"
+            loading="lazy"><span class="pg-badge">Panels &amp; Covers</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Machine Panel — Powder Coat (Set 3)</div>
+          <div class="pg-desc">Large-format multi-zone panel with reinforced bends for heavy machinery enclosures.</div>
+          <div class="pg-tags"><span class="pg-tag">Large Format</span><span class="pg-tag">Reinforced</span><span
+              class="pg-tag">Multi-coat</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="panels" data-id="penal-004">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-PENAL-004.jpg" alt="Machine Panel 4"
+            loading="lazy"><span class="pg-badge">Panels &amp; Covers</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Machine Panel &amp; Cover (Set 4)</div>
+          <div class="pg-desc">Complete panel and cover assembly with powder coat — ready for control system
+            integration.</div>
+          <div class="pg-tags"><span class="pg-tag">Panel + Cover</span><span class="pg-tag">Ready Assembly</span><span
+              class="pg-tag">Custom RAL</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="panels" data-id="cover-001">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-COVER-001.jpg" alt="Terminal Cover"
+            loading="lazy"><span class="pg-badge">Panels &amp; Covers</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Terminal Cover — White Powder Coat</div>
+          <div class="pg-desc">White electrostatic powder-coated terminal cover. Snap-fit or screw-fixed variants
+            available.</div>
+          <div class="pg-tags"><span class="pg-tag">RAL 9016</span><span class="pg-tag">Snap-fit</span><span
+              class="pg-tag">Screw-fix</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="panels" data-id="cover-bat">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-COVER-BATTERY-001.jpg" alt="Battery Box"
+            loading="lazy"><span class="pg-badge">Panels &amp; Covers</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Battery Box with Holding Clamp</div>
+          <div class="pg-desc">White powder-coated battery enclosure with integrated clamp for securing packs in control
+            panels.</div>
+          <div class="pg-tags"><span class="pg-tag">White</span><span class="pg-tag">Integrated Clamp</span><span
+              class="pg-tag">UPS</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
       <!-- MACHINED -->
-      <div class="pg-card" data-cat="machined" data-id="clamp-001"><div class="pg-img-wrap"><img src="assets/images/products/MECH-CLAMP-001.jpg" alt="Panel Clamp" loading="lazy"><span class="pg-badge">Machined Parts</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Battery &amp; Panel Clamp</div><div class="pg-desc">Sheet metal clamp for securing batteries or components inside panels and enclosure boxes.</div><div class="pg-tags"><span class="pg-tag">Sheet Metal</span><span class="pg-tag">Adjustable</span><span class="pg-tag">Zinc/Powder</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="machined" data-id="cross-001"><div class="pg-img-wrap"><img src="assets/images/products/MECH-CROSSOVER-001.jpg" alt="Crossover Fitting" loading="lazy"><span class="pg-badge">Machined Parts</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Crossover Fitting</div><div class="pg-desc">Precision-machined crossover fitting for fluid or pneumatic assemblies. Male and female thread options.</div><div class="pg-tags"><span class="pg-tag">Brass / SS</span><span class="pg-tag">BSP / NPT</span><span class="pg-tag">150 bar</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="machined" data-id="cross-001f"><div class="pg-img-wrap"><img src="assets/images/products/MECH-CROSSOVER-001-F.jpg" alt="Crossover Female" loading="lazy"><span class="pg-badge">Machined Parts</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Crossover Fitting — Female</div><div class="pg-desc">Female-thread crossover fitting to tight tolerances for leak-free pipe and hose connections.</div><div class="pg-tags"><span class="pg-tag">Female Thread</span><span class="pg-tag">Leak-Free</span><span class="pg-tag">O-Ring</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="machined" data-id="cross-002m"><div class="pg-img-wrap"><img src="assets/images/products/MECH-CROSSOVER-002-M.jpg" alt="Crossover Male" loading="lazy"><span class="pg-badge">Machined Parts</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Crossover Fitting — Male</div><div class="pg-desc">Male-thread crossover fitting for pneumatic, hydraulic, and plumbing systems. Nickel or zinc plated.</div><div class="pg-tags"><span class="pg-tag">Male Thread</span><span class="pg-tag">Nickel / Zinc</span><span class="pg-tag">Pressure Tested</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="machined" data-id="cross-004"><div class="pg-img-wrap"><img src="assets/images/products/MECH-CROSSOVER-004.jpg" alt="Nipples" loading="lazy"><span class="pg-badge">Machined Parts</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Body Caps, Pin Joints &amp; Nipples</div><div class="pg-desc">2" Body Caps, Pin Joints, Nipples and Choke Nipples for industrial valve and fluid handling.</div><div class="pg-tags"><span class="pg-tag">Body Cap</span><span class="pg-tag">Nipple</span><span class="pg-tag">Oil &amp; Gas</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
+      <div class="pg-card" data-cat="machined" data-id="clamp-001">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-CLAMP-001.jpg" alt="Panel Clamp"
+            loading="lazy"><span class="pg-badge">Machined Parts</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Battery &amp; Panel Clamp</div>
+          <div class="pg-desc">Sheet metal clamp for securing batteries or components inside panels and enclosure boxes.
+          </div>
+          <div class="pg-tags"><span class="pg-tag">Sheet Metal</span><span class="pg-tag">Adjustable</span><span
+              class="pg-tag">Zinc/Powder</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="machined" data-id="cross-001">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-CROSSOVER-001.jpg" alt="Crossover Fitting"
+            loading="lazy"><span class="pg-badge">Machined Parts</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Crossover Fitting</div>
+          <div class="pg-desc">Precision-machined crossover fitting for fluid or pneumatic assemblies. Male and female
+            thread options.</div>
+          <div class="pg-tags"><span class="pg-tag">Brass / SS</span><span class="pg-tag">BSP / NPT</span><span
+              class="pg-tag">150 bar</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="machined" data-id="cross-001f">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-CROSSOVER-001-F.jpg" alt="Crossover Female"
+            loading="lazy"><span class="pg-badge">Machined Parts</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Crossover Fitting — Female</div>
+          <div class="pg-desc">Female-thread crossover fitting to tight tolerances for leak-free pipe and hose
+            connections.</div>
+          <div class="pg-tags"><span class="pg-tag">Female Thread</span><span class="pg-tag">Leak-Free</span><span
+              class="pg-tag">O-Ring</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="machined" data-id="cross-002m">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-CROSSOVER-002-M.jpg" alt="Crossover Male"
+            loading="lazy"><span class="pg-badge">Machined Parts</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Crossover Fitting — Male</div>
+          <div class="pg-desc">Male-thread crossover fitting for pneumatic, hydraulic, and plumbing systems. Nickel or
+            zinc plated.</div>
+          <div class="pg-tags"><span class="pg-tag">Male Thread</span><span class="pg-tag">Nickel / Zinc</span><span
+              class="pg-tag">Pressure Tested</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="machined" data-id="cross-004">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-CROSSOVER-004.jpg" alt="Nipples"
+            loading="lazy"><span class="pg-badge">Machined Parts</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Body Caps, Pin Joints &amp; Nipples</div>
+          <div class="pg-desc">2" Body Caps, Pin Joints, Nipples and Choke Nipples for industrial valve and fluid
+            handling.</div>
+          <div class="pg-tags"><span class="pg-tag">Body Cap</span><span class="pg-tag">Nipple</span><span
+              class="pg-tag">Oil &amp; Gas</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
       <!-- SS -->
-      <div class="pg-card" data-cat="ss" data-id="ss-sheet-001"><div class="pg-img-wrap"><img src="assets/images/products/MECH-SS-SHEET-001.jpg" alt="SS Sheet" loading="lazy"><span class="pg-badge">SS &amp; Rods</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Laser-Cut Stainless Steel Sheet</div><div class="pg-desc">Precision laser-cut SS 304 / SS 316 sheet metal parts in custom shapes for industrial use.</div><div class="pg-tags"><span class="pg-tag">SS 304 / 316</span><span class="pg-tag">Laser Cut</span><span class="pg-tag">Custom Shapes</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="ss" data-id="rods-001"><div class="pg-img-wrap"><img src="assets/images/products/MECH-RODS-001.jpg" alt="SS Rods" loading="lazy"><span class="pg-badge">SS &amp; Rods</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Stainless Steel Rods &amp; Bars</div><div class="pg-desc">SS 303, 304, and 316 round bars cut to length or in standard mill lengths for machining.</div><div class="pg-tags"><span class="pg-tag">SS 303/304/316</span><span class="pg-tag">Round Bar</span><span class="pg-tag">Cut to Length</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
+      <div class="pg-card" data-cat="ss" data-id="ss-sheet-001">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-SS-SHEET-001.jpg" alt="SS Sheet"
+            loading="lazy"><span class="pg-badge">SS &amp; Rods</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Laser-Cut Stainless Steel Sheet</div>
+          <div class="pg-desc">Precision laser-cut SS 304 / SS 316 sheet metal parts in custom shapes for industrial
+            use.</div>
+          <div class="pg-tags"><span class="pg-tag">SS 304 / 316</span><span class="pg-tag">Laser Cut</span><span
+              class="pg-tag">Custom Shapes</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="ss" data-id="rods-001">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-RODS-001.jpg" alt="SS Rods" loading="lazy"><span
+            class="pg-badge">SS &amp; Rods</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Stainless Steel Rods &amp; Bars</div>
+          <div class="pg-desc">SS 303, 304, and 316 round bars cut to length or in standard mill lengths for machining.
+          </div>
+          <div class="pg-tags"><span class="pg-tag">SS 303/304/316</span><span class="pg-tag">Round Bar</span><span
+              class="pg-tag">Cut to Length</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
       <!-- AUTOMOTIVE -->
-      <div class="pg-card" data-cat="automotive" data-id="adjuster-top"><div class="pg-img-wrap"><img src="assets/images/products/ADJUSTER_TOP_VIEW.png" alt="Adjuster Ring Top" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Adjuster Ring — Top View</div><div class="pg-desc">Cast adjuster ring with internal threading and external castellated locking tabs for suspension assemblies.</div><div class="pg-tags"><span class="pg-tag">Cast Al</span><span class="pg-tag">Internal Thread</span><span class="pg-tag">Suspension</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="adjuster-side"><div class="pg-img-wrap"><img src="assets/images/products/ADJUSTER_SIDE_VEIW.png" alt="Adjuster Ring Side" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Adjuster Ring — Side View</div><div class="pg-desc">Side profile showing threaded bore depth and external castellated locking profile of the adjuster ring.</div><div class="pg-tags"><span class="pg-tag">Cast Al</span><span class="pg-tag">Castellated</span><span class="pg-tag">Threaded Bore</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="adj-joint-pins"><div class="pg-img-wrap"><img src="assets/images/products/ADJUSTER_AND_JOINT_PINS.png" alt="Adjuster Joint Pins" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Adjuster Ring &amp; Joint Pins Set</div><div class="pg-desc">Complete set of adjuster ring and flanged joint pins for automotive linkage and suspension assemblies.</div><div class="pg-tags"><span class="pg-tag">Kit Set</span><span class="pg-tag">Joint Pins</span><span class="pg-tag">Suspension</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="eng-brackets"><div class="pg-img-wrap"><img src="assets/images/products/ENGINE_AND_BUPER_SUPPORT_BRACKETS.png" alt="Engine Brackets" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Engine &amp; Bumper Support Brackets</div><div class="pg-desc">Die-cast aluminium structural brackets with intricate ribbed web for engine bay and bumper mounting.</div><div class="pg-tags"><span class="pg-tag">Die-Cast Al</span><span class="pg-tag">Ribbed Web</span><span class="pg-tag">Lightweight</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="bumper-bracket"><div class="pg-img-wrap"><img src="assets/images/products/BUMPER_BRACKET.png" alt="Bumper Bracket" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Bumper Bracket — Structural Support</div><div class="pg-desc">HPDC aluminium bumper support with triangulated ribs, oval slots, and multi-point flanges.</div><div class="pg-tags"><span class="pg-tag">Die-Cast Al</span><span class="pg-tag">Bumper Mount</span><span class="pg-tag">Oval Slots</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="foot-grills"><div class="pg-img-wrap"><img src="assets/images/products/FOOT_GRILLS.png" alt="Foot Grills" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Foot Grills — Cross-Hatch Pattern</div><div class="pg-desc">Die-cast aluminium foot grills with diamond cross-hatch lattice and integrated pivot pin hinge.</div><div class="pg-tags"><span class="pg-tag">Die-Cast Al</span><span class="pg-tag">Cross-Hatch</span><span class="pg-tag">Pivot Hinge</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="footrests"><div class="pg-img-wrap"><img src="assets/images/products/FOOTRESTS.png" alt="Footrests" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Footrest — Anti-Slip Machined</div><div class="pg-desc">Black anodised aluminium footrest with raised anti-slip dot pattern and pre-drilled mounting plate.</div><div class="pg-tags"><span class="pg-tag">Black Anodised</span><span class="pg-tag">Anti-Slip</span><span class="pg-tag">Bolt-On</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="pins-sockets"><div class="pg-img-wrap"><img src="assets/images/products/PINS_SOCKETS.png" alt="Pins Sockets" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Pins &amp; Sockets — Flanged Bush</div><div class="pg-desc">Precision-turned flanged socket bushings — weld-in inserts, pivot pin housings, and rod-end sockets.</div><div class="pg-tags"><span class="pg-tag">Carbon Steel</span><span class="pg-tag">Flanged Bush</span><span class="pg-tag">Weld-in</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="piston-head"><div class="pg-img-wrap"><img src="assets/images/products/PISTON_HEAD.png" alt="Piston Head" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Piston Head — Flanged Disc</div><div class="pg-desc">CNC-turned aluminium piston heads with O-ring groove and centre bore for hydraulic and pneumatic cylinders.</div><div class="pg-tags"><span class="pg-tag">Aluminium</span><span class="pg-tag">CNC Turned</span><span class="pg-tag">Hydraulic</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="pistons-side"><div class="pg-img-wrap"><img src="assets/images/products/PISTONS_SIDE_VIEW.png" alt="Pistons Side" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Piston Assembly — Side View</div><div class="pg-desc">Stepped shoulder piston assemblies with groove ring and hollow bore for cylinder rod-end applications.</div><div class="pg-tags"><span class="pg-tag">Stepped Shoulder</span><span class="pg-tag">Groove Ring</span><span class="pg-tag">Rod-End</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="small-pistons"><div class="pg-img-wrap"><img src="assets/images/products/small_pistons.png" alt="Small Pistons" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Small Pistons — Miniature Turned</div><div class="pg-desc">Compact CNC-turned SS piston bodies for miniature hydraulic actuators, shock absorbers, and fluid control.</div><div class="pg-tags"><span class="pg-tag">SS / Al</span><span class="pg-tag">Miniature</span><span class="pg-tag">Shock Absorber</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="side-brackets"><div class="pg-img-wrap"><img src="assets/images/products/SIDE_BRACKETS.png" alt="Side Brackets" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Side Brackets — Die-Cast Structural</div><div class="pg-desc">Matched pair of die-cast aluminium side brackets with ribbed underside for seat rail or console mounting.</div><div class="pg-tags"><span class="pg-tag">Die-Cast Al</span><span class="pg-tag">Seat Rail</span><span class="pg-tag">Mirror-Pair</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
-      <div class="pg-card" data-cat="automotive" data-id="spindles"><div class="pg-img-wrap"><img src="assets/images/products/SPINDLES.png" alt="Spindles" loading="lazy"><span class="pg-badge">Automotive</span><div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div></div><div class="pg-body"><div class="pg-name">Spindles &amp; Pin Sockets</div><div class="pg-desc">Brass cylindrical spacers and precision splined spindle with hex head for gear linkages and window regulators.</div><div class="pg-tags"><span class="pg-tag">Brass</span><span class="pg-tag">Splined Spindle</span><span class="pg-tag">Zinc Plated</span></div><span class="pg-view-btn">View Details <i class="fas fa-arrow-right"></i></span></div></div>
+      <div class="pg-card" data-cat="automotive" data-id="adjuster-top">
+        <div class="pg-img-wrap"><img src="assets/images/products/ADJUSTER_TOP_VIEW.png" alt="Adjuster Ring Top"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Adjuster Ring — Top View</div>
+          <div class="pg-desc">Cast adjuster ring with internal threading and external castellated locking tabs for
+            suspension assemblies.</div>
+          <div class="pg-tags"><span class="pg-tag">Cast Al</span><span class="pg-tag">Internal Thread</span><span
+              class="pg-tag">Suspension</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="adjuster-side">
+        <div class="pg-img-wrap"><img src="assets/images/products/ADJUSTER_SIDE_VEIW.png" alt="Adjuster Ring Side"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Adjuster Ring — Side View</div>
+          <div class="pg-desc">Side profile showing threaded bore depth and external castellated locking profile of the
+            adjuster ring.</div>
+          <div class="pg-tags"><span class="pg-tag">Cast Al</span><span class="pg-tag">Castellated</span><span
+              class="pg-tag">Threaded Bore</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="adj-joint-pins">
+        <div class="pg-img-wrap"><img src="assets/images/products/ADJUSTER_AND_JOINT_PINS.png" alt="Adjuster Joint Pins"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Adjuster Ring &amp; Joint Pins Set</div>
+          <div class="pg-desc">Complete set of adjuster ring and flanged joint pins for automotive linkage and
+            suspension assemblies.</div>
+          <div class="pg-tags"><span class="pg-tag">Kit Set</span><span class="pg-tag">Joint Pins</span><span
+              class="pg-tag">Suspension</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="eng-brackets">
+        <div class="pg-img-wrap"><img src="assets/images/products/ENGINE_AND_BUPER_SUPPORT_BRACKETS.png"
+            alt="Engine Brackets" loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Engine &amp; Bumper Support Brackets</div>
+          <div class="pg-desc">Die-cast aluminium structural brackets with intricate ribbed web for engine bay and
+            bumper mounting.</div>
+          <div class="pg-tags"><span class="pg-tag">Die-Cast Al</span><span class="pg-tag">Ribbed Web</span><span
+              class="pg-tag">Lightweight</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="bumper-bracket">
+        <div class="pg-img-wrap"><img src="assets/images/products/BUMPER_BRACKET.png" alt="Bumper Bracket"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Bumper Bracket — Structural Support</div>
+          <div class="pg-desc">HPDC aluminium bumper support with triangulated ribs, oval slots, and multi-point
+            flanges.</div>
+          <div class="pg-tags"><span class="pg-tag">Die-Cast Al</span><span class="pg-tag">Bumper Mount</span><span
+              class="pg-tag">Oval Slots</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="foot-grills">
+        <div class="pg-img-wrap"><img src="assets/images/products/FOOT_GRILLS.png" alt="Foot Grills"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Foot Grills — Cross-Hatch Pattern</div>
+          <div class="pg-desc">Die-cast aluminium foot grills with diamond cross-hatch lattice and integrated pivot pin
+            hinge.</div>
+          <div class="pg-tags"><span class="pg-tag">Die-Cast Al</span><span class="pg-tag">Cross-Hatch</span><span
+              class="pg-tag">Pivot Hinge</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="footrests">
+        <div class="pg-img-wrap"><img src="assets/images/products/FOOTRESTS.png" alt="Footrests" loading="lazy"><span
+            class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Footrest — Anti-Slip Machined</div>
+          <div class="pg-desc">Black anodised aluminium footrest with raised anti-slip dot pattern and pre-drilled
+            mounting plate.</div>
+          <div class="pg-tags"><span class="pg-tag">Black Anodised</span><span class="pg-tag">Anti-Slip</span><span
+              class="pg-tag">Bolt-On</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="pins-sockets">
+        <div class="pg-img-wrap"><img src="assets/images/products/PINS_SOCKETS.png" alt="Pins Sockets"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Pins &amp; Sockets — Flanged Bush</div>
+          <div class="pg-desc">Precision-turned flanged socket bushings — weld-in inserts, pivot pin housings, and
+            rod-end sockets.</div>
+          <div class="pg-tags"><span class="pg-tag">Carbon Steel</span><span class="pg-tag">Flanged Bush</span><span
+              class="pg-tag">Weld-in</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="piston-head">
+        <div class="pg-img-wrap"><img src="assets/images/products/PISTON_HEAD.png" alt="Piston Head"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Piston Head — Flanged Disc</div>
+          <div class="pg-desc">CNC-turned aluminium piston heads with O-ring groove and centre bore for hydraulic and
+            pneumatic cylinders.</div>
+          <div class="pg-tags"><span class="pg-tag">Aluminium</span><span class="pg-tag">CNC Turned</span><span
+              class="pg-tag">Hydraulic</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="pistons-side">
+        <div class="pg-img-wrap"><img src="assets/images/products/PISTONS_SIDE_VIEW.png" alt="Pistons Side"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Piston Assembly — Side View</div>
+          <div class="pg-desc">Stepped shoulder piston assemblies with groove ring and hollow bore for cylinder rod-end
+            applications.</div>
+          <div class="pg-tags"><span class="pg-tag">Stepped Shoulder</span><span class="pg-tag">Groove Ring</span><span
+              class="pg-tag">Rod-End</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="small-pistons">
+        <div class="pg-img-wrap"><img src="assets/images/products/small_pistons.png" alt="Small Pistons"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Small Pistons — Miniature Turned</div>
+          <div class="pg-desc">Compact CNC-turned SS piston bodies for miniature hydraulic actuators, shock absorbers,
+            and fluid control.</div>
+          <div class="pg-tags"><span class="pg-tag">SS / Al</span><span class="pg-tag">Miniature</span><span
+              class="pg-tag">Shock Absorber</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="side-brackets">
+        <div class="pg-img-wrap"><img src="assets/images/products/SIDE_BRACKETS.png" alt="Side Brackets"
+            loading="lazy"><span class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Side Brackets — Die-Cast Structural</div>
+          <div class="pg-desc">Matched pair of die-cast aluminium side brackets with ribbed underside for seat rail or
+            console mounting.</div>
+          <div class="pg-tags"><span class="pg-tag">Die-Cast Al</span><span class="pg-tag">Seat Rail</span><span
+              class="pg-tag">Mirror-Pair</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="automotive" data-id="spindles">
+        <div class="pg-img-wrap"><img src="assets/images/products/SPINDLES.png" alt="Spindles" loading="lazy"><span
+            class="pg-badge">Automotive</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Spindles &amp; Pin Sockets</div>
+          <div class="pg-desc">Brass cylindrical spacers and precision splined spindle with hex head for gear linkages
+            and window regulators.</div>
+          <div class="pg-tags"><span class="pg-tag">Brass</span><span class="pg-tag">Splined Spindle</span><span
+              class="pg-tag">Zinc Plated</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <!-- RUBBER BEADING -->
+      <div class="pg-card" data-cat="rubber-beading" data-id="bid-001b">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-001B.jpg"
+            alt="Black Rubber Beading Type 1" loading="lazy"><span class="pg-badge">Rubber Beading</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Rubber Beading — Black (Type 1)</div>
+          <div class="pg-desc">Flexible black EPDM edge beading for sealing and vibration dampening in machine panels
+            and enclosures.</div>
+          <div class="pg-tags"><span class="pg-tag">Black</span><span class="pg-tag">EPDM</span><span
+              class="pg-tag">Custom Sizes</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="rubber-beading" data-id="bid-001w">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-001W.jpg" alt="White Rubber Beading"
+            loading="lazy"><span class="pg-badge">Rubber Beading</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Rubber Beading — White (Type 1)</div>
+          <div class="pg-desc">White EPDM edge beading for aesthetic edge protection on control panels and machine
+            frames.</div>
+          <div class="pg-tags"><span class="pg-tag">White</span><span class="pg-tag">EPDM</span><span
+              class="pg-tag">Custom Sizes</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="rubber-beading" data-id="bid-001c">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-001C.jpg"
+            alt="Rubber Beading Colour Range" loading="lazy"><span class="pg-badge">Rubber Beading</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Rubber Beading — Colour Range</div>
+          <div class="pg-desc">Available in black, white, and grey across various cross-section profiles for industrial
+            sealing.</div>
+          <div class="pg-tags"><span class="pg-tag">Multi-colour</span><span class="pg-tag">Various Profiles</span><span
+              class="pg-tag">OEM</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="rubber-beading" data-id="bid-002b">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-002B.jpg"
+            alt="Black Rubber Beading Type 2" loading="lazy"><span class="pg-badge">Rubber Beading</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Rubber Beading — Black (Type 2)</div>
+          <div class="pg-desc">Heavy-duty wide-profile black beading for thicker sheet metal panels and structural
+            frames.</div>
+          <div class="pg-tags"><span class="pg-tag">Black</span><span class="pg-tag">Heavy Duty</span><span
+              class="pg-tag">Wide Profile</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="rubber-beading" data-id="bid-002w">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-002W.jpg"
+            alt="White Rubber Beading Type 2" loading="lazy"><span class="pg-badge">Rubber Beading</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Rubber Beading — White (Type 2)</div>
+          <div class="pg-desc">Wide-profile white beading for electrical enclosures requiring dust and moisture
+            protection.</div>
+          <div class="pg-tags"><span class="pg-tag">White</span><span class="pg-tag">IP54</span><span
+              class="pg-tag">Wide Profile</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="rubber-beading" data-id="bid-003w">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-003W.jpg"
+            alt="White Rubber Beading Type 3" loading="lazy"><span class="pg-badge">Rubber Beading</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Rubber Beading — White (Type 3)</div>
+          <div class="pg-desc">Slim-profile white beading for precision electronics and medical equipment enclosures.
+          </div>
+          <div class="pg-tags"><span class="pg-tag">White</span><span class="pg-tag">Slim Profile</span><span
+              class="pg-tag">Medical Grade</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="rubber-beading" data-id="bid-004">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-004.jpg" alt="Rubber Beading Type 4"
+            loading="lazy"><span class="pg-badge">Rubber Beading</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Rubber Beading — Type 4</div>
+          <div class="pg-desc">Specialised beading with unique cross-section for curved or irregular edge profiles.
+          </div>
+          <div class="pg-tags"><span class="pg-tag">Special Profile</span><span class="pg-tag">Curved Edge</span><span
+              class="pg-tag">Automotive</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+      <div class="pg-card" data-cat="rubber-beading" data-id="bid-005">
+        <div class="pg-img-wrap"><img src="assets/images/products/MECH-BIDDING-005.jpg" alt="Rubber Beading Type 5"
+            loading="lazy"><span class="pg-badge">Rubber Beading</span>
+          <div class="pg-zoom-hint"><i class="fas fa-expand-alt"></i></div>
+        </div>
+        <div class="pg-body">
+          <div class="pg-name">Rubber Beading — Type 5</div>
+          <div class="pg-desc">Multipurpose beading for automotive, industrial, and electronics enclosures. Bulk roll
+            supply.</div>
+          <div class="pg-tags"><span class="pg-tag">Multipurpose</span><span class="pg-tag">Automotive</span><span
+              class="pg-tag">Roll Supply</span></div><span class="pg-view-btn">View Details <i
+              class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
 
       <div class="pg-empty" id="pgEmpty"><i class="fas fa-box-open"></i>No products found in this category.</div>
     </section>
@@ -169,87 +615,121 @@
         <span class="modal-badge" id="modalBadge"></span>
         <h2 class="modal-title" id="modalTitle"></h2>
         <p class="modal-desc" id="modalDesc"></p>
-        <div class="modal-specs"><h4>Specifications</h4><div id="modalSpecRows"></div></div>
+        <div class="modal-specs">
+          <h4>Specifications</h4>
+          <div id="modalSpecRows"></div>
+        </div>
         <div class="modal-tags" id="modalTags"></div>
-        <a href="index.html#enquiry" class="modal-enquiry-btn"><i class="fas fa-paper-plane"></i> Enquire About This Product</a>
+        <a href="index.html#enquiry" class="modal-enquiry-btn"><i class="fas fa-paper-plane"></i> Enquire About This
+          Product</a>
       </div>
     </div>
   </div>
 
+  <!-- ══ FOOTER ══ -->
   <footer class="site-footer">
     <div class="footer-container">
-      <div class="footer-box"><h4>About Us</h4><p>Alije Group is a trusted sourcing company providing high-quality engineering goods from India to global clients.</p></div>
-      <div class="footer-box"><h4>Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="products.html">Products Gallery</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
-      <div class="footer-box"><h4>Contact</h4><p><i class="fas fa-envelope" style="color:#60a5fa;margin-right:6px"></i> enterprisesalije@gmail.com</p><p><i class="fas fa-phone" style="color:#60a5fa;margin-right:6px"></i> +91 84760 16955</p><p><i class="fas fa-map-marker-alt" style="color:#60a5fa;margin-right:6px"></i> India</p></div>
-      <div class="footer-box"><h4>Follow Us</h4><div class="footer-social"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div>
+      <div class="footer-box">
+        <h4>About Us</h4>
+        <p>Alije Group is a trusted sourcing company providing high-quality engineering goods from India to global
+          clients.</p>
+      </div>
+      <div class="footer-box">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Our Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h4>Contact</h4>
+        <p><i class="fas fa-envelope" style="color:#60a5fa;margin-right:6px"></i> enterprisesalije@gmail.com</p>
+        <p><i class="fas fa-phone" style="color:#60a5fa;margin-right:6px"></i> +91 84760 16955</p>
+        <p><i class="fas fa-map-marker-alt" style="color:#60a5fa;margin-right:6px"></i> India</p>
+      </div>
+      <div class="footer-box">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/918476016955" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
     </div>
-    <div class="footer-bottom"><span>© 2026 Alije Group. All rights reserved.</span><span>Made with <i class="fas fa-heart" style="color:#ef4444"></i> in India</span></div>
+    <div class="footer-bottom">
+      <span>© 2026 Alije Group. All rights reserved. Version 2.3.2</span>
+      <span><a href="mailto:knight.styles.26@gmail.com" target="_blank" rel="noopener noreferrer">Designed by <b>Styles
+            Tech</b></a></span>
+    </div>
   </footer>
   <button id="scrollTop" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
 
   <script>
-  const PRODUCTS={
-    "bid-001b":{name:"Rubber Beading — Black (Style 1)",category:"Rubber Beading",images:["assets/images/products/MECH-BIDDING-001B.jpg","assets/images/products/MECH-BIDDING-002B.jpg"],desc:"Flexible black EPDM rubber beading for edge finishing, sealing, and vibration dampening in machine panels and enclosures. Supplied in rolls or cut to length.",specs:[["Material","EPDM Rubber (Black)"],["Profile","U-Channel / Edge Trim"],["Sheet Fit","0.8 mm – 4 mm"],["Hardness","60 ± 5 Shore A"],["Temp. Range","-40°C to +120°C"],["Supply Form","Roll / Cut to Length"],["Certification","RoHS Compliant"]],tags:["EPDM","Black","U-Channel","RoHS","Custom Sizes"]},
-    "bid-001w":{name:"Rubber Beading — White (Style 1)",category:"Rubber Beading",images:["assets/images/products/MECH-BIDDING-001W.jpg","assets/images/products/MECH-BIDDING-002W.jpg"],desc:"White EPDM rubber beading for clean edge protection on control panels and machine frames.",specs:[["Material","EPDM Rubber (White)"],["Profile","U-Channel / Edge Trim"],["Sheet Fit","0.8 mm – 3 mm"],["Hardness","60 ± 5 Shore A"],["Temp. Range","-40°C to +120°C"],["Supply Form","Roll / Cut to Length"],["Certification","RoHS Compliant"]],tags:["EPDM","White","U-Channel","RoHS","Temperature Resistant"]},
-    "bid-001c":{name:"Rubber Beading — Colour Range",category:"Rubber Beading",images:["assets/images/products/MECH-BIDDING-001C.jpg"],desc:"Available in black, white, and grey across U-Channel, P-Profile, and D-Profile cross-sections. OEM private-label packaging available.",specs:[["Material","EPDM / NBR Rubber"],["Colours","Black, White, Grey"],["Profiles","U-Channel, P-Profile, D-Profile"],["Sheet Fit","0.5 mm – 5 mm"],["MOQ","As per profile / colour"],["Lead Time","3–6 weeks"]],tags:["Multi-colour","EPDM / NBR","Various Profiles","OEM Available"]},
-    "bid-002b":{name:"Rubber Beading — Black (Style 2)",category:"Rubber Beading",images:["assets/images/products/MECH-BIDDING-002B.jpg","assets/images/products/MECH-BIDDING-001B.jpg"],desc:"Heavy-duty black rubber edge beading with wider profile for thicker sheet metal panels up to 5 mm.",specs:[["Material","EPDM Rubber (Black)"],["Profile","Wide U-Channel"],["Sheet Fit","2 mm – 5 mm"],["Hardness","65 ± 5 Shore A"],["Temp. Range","-30°C to +110°C"],["Supply Form","Roll / Cut to Length"]],tags:["Black","Heavy Duty","Wide Profile","5 mm Panels"]},
-    "bid-002w":{name:"Rubber Beading — White (Style 2)",category:"Rubber Beading",images:["assets/images/products/MECH-BIDDING-002W.jpg","assets/images/products/MECH-BIDDING-001W.jpg"],desc:"Wide-profile white beading for electrical enclosures. IP54-compatible sealing when properly fitted.",specs:[["Material","EPDM Rubber (White)"],["Profile","Wide U-Channel"],["Sheet Fit","2 mm – 4 mm"],["IP Rating","IP54 compatible when fitted"],["Hardness","60 ± 5 Shore A"],["Supply Form","Roll / Cut to Length"]],tags:["White","Wide Profile","IP54","Dust Seal","Moisture Protection"]},
-    "bid-003w":{name:"Rubber Beading — White (Style 3)",category:"Rubber Beading",images:["assets/images/products/MECH-BIDDING-003W.jpg"],desc:"Slim-profile white beading for precision applications in consumer electronics and medical equipment.",specs:[["Material","EPDM Rubber (White)"],["Profile","Slim U-Channel"],["Sheet Fit","0.5 mm – 1.5 mm"],["Application","Electronics, Medical Equipment"],["Hardness","55 ± 5 Shore A"],["Supply Form","Roll / Cut to Length"]],tags:["White","Slim Profile","Precision Fit","Medical Grade","Electronics"]},
-    "bid-004":{name:"Rubber Beading — Style 4",category:"Rubber Beading",images:["assets/images/products/MECH-BIDDING-004.jpg"],desc:"Specialised rubber beading with unique cross-section for curved or irregular edge profiles and automotive body trim.",specs:[["Material","EPDM / NBR Rubber"],["Profile","Special / Curved Edge"],["Flexibility","High — suited for curves"],["Application","Automotive, Curved Panels"],["MOQ","As per order"],["Lead Time","4–6 weeks"]],tags:["Special Profile","Curved Edge","Automotive","High Flexibility"]},
-    "bid-005":{name:"Rubber Beading — Style 5",category:"Rubber Beading",images:["assets/images/products/MECH-BIDDING-005.jpg"],desc:"Multipurpose rubber beading strip for automotive, industrial, and consumer electronics. Bulk roll supply for OEM manufacturers.",specs:[["Material","EPDM Rubber"],["Profile","D-Profile / P-Profile"],["Application","Automotive, Industrial, Electronics"],["Supply Form","Bulk Roll"],["MOQ","100 m minimum"],["Certification","RoHS Compliant"]],tags:["Multipurpose","Automotive Grade","Bulk Roll","OEM","D-Profile"]},
-    "brass-001":{name:"Brass Machined Components — Set A",category:"Brass Components",images:["assets/images/products/MECH-BRASS-001.jpg","assets/images/products/MECH-BRASS-002.jpg"],desc:"Precision CNC-turned brass components including fittings, inserts, and connectors to IS 319 Grade I/II. Mirror finish, no burrs.",specs:[["Material","Brass IS 319 Grade I / II"],["Process","CNC Turning / Milling"],["Finish","Natural Brass / Nickel Plated"],["Tolerance","±0.01 mm"],["Inspection","100% Dimensional Check"],["Certification","Mill Test Certificate available"]],tags:["IS 319","CNC Turned","Mirror Polish","No Burrs","MTC"]},
-    "brass-002":{name:"Brass Machined Components — Set B",category:"Brass Components",images:["assets/images/products/MECH-BRASS-002.jpg","assets/images/products/MECH-BRASS-003.jpg"],desc:"EN 12164 CW614N / CW617N grade brass — nuts, bolts, nipples, and custom turned parts for electrical and plumbing applications.",specs:[["Material","Brass EN 12164 CW614N / CW617N"],["Process","CNC Turning"],["Finish","Nickel / Chrome Plated"],["Thread Standard","BSP, NPT, Metric"],["Tolerance","±0.01 mm"],["Certification","MTC on request"]],tags:["EN 12164 CW614N","Nickel Plated","Chrome","BSP / NPT","OEM"]},
-    "brass-003":{name:"Brass Machined Components — Set C",category:"Brass Components",images:["assets/images/products/MECH-BRASS-003.jpg","assets/images/products/MECH-BRASS-004.jpg"],desc:"BS 2874 CZ121 / CZ122 free-machining brass with polished mirror surface for high-volume precision parts.",specs:[["Material","Brass BS 2874 CZ121 / CZ122"],["Process","CNC Turning, Auto-Lathe"],["Finish","Mirror Polished / Tin Plated"],["Surface","Burr-free, defect-free"],["Tolerance","±0.005 mm"],["MOQ","500 pcs minimum"]],tags:["BS 2874 CZ121","Mirror Polish","Tin Plated","High Volume","Automotive"]},
-    "brass-004":{name:"Brass Machined Components — Set D",category:"Brass Components",images:["assets/images/products/MECH-BRASS-004.jpg","assets/images/products/MECH-BRASS-001.jpg"],desc:"ASTM B16 C36000 free-cutting brass — fittings, terminals, and precision assemblies to customer CAD / drawings.",specs:[["Material","Brass ASTM B16 C36000"],["Process","CNC Turning / Swiss-Type Lathe"],["Finish","Chrome, Tin, Zinc, Silver, Gold"],["Tolerance","±0.01 mm or per drawing"],["Lead Time","4–8 weeks"],["Certification","RoHS, REACH on request"]],tags:["ASTM B16","Multi-Finish","CAD Driven","RoHS","REACH"]},
-    "penal-001":{name:"Machine Panel — Powder Coat (Set 1)",category:"Panels & Covers",images:["assets/images/products/MECH-PENAL-001.jpg","assets/images/products/MECH-PENAL-002.jpg"],desc:"CRCA sheet metal machine panel with electrostatic powder coat finish and custom cut-outs to customer drawing.",specs:[["Material","CRCA Sheet Steel"],["Thickness","1.0 mm – 3.0 mm"],["Finish","Electrostatic Powder Coat"],["Standard Colour","RAL 7032 (custom available)"],["Process","Laser Cut, CNC Punch, Bend, Weld"],["IP Compatibility","IP54 / IP65 enclosures"]],tags:["CRCA Steel","Powder Coat","CNC Punch","IP54/65","Custom Cut-outs"]},
-    "penal-002":{name:"Machine Panel — Powder Coat (Set 2)",category:"Panels & Covers",images:["assets/images/products/MECH-PENAL-002.jpg","assets/images/products/MECH-PENAL-003.jpg"],desc:"Formed and punched machine panel with DIN rail mounting provisions and cable entry knockouts.",specs:[["Material","CRCA / GI Sheet Steel"],["Thickness","1.2 mm – 2.0 mm"],["Finish","Powder Coat RAL 7035 (standard)"],["Features","DIN Rail, Cable Knockouts"],["Process","CNC Punch, Brake Press, Weld"],["MOQ","Per drawing"]],tags:["DIN Rail","PLC Enclosure","GI / CRCA","Brake Press","RAL 7035"]},
-    "penal-003":{name:"Machine Panel — Powder Coat (Set 3)",category:"Panels & Covers",images:["assets/images/products/MECH-PENAL-003.jpg","assets/images/products/MECH-PENAL-004.jpg"],desc:"Large-format machine panel with multi-zone punching and reinforced bends for heavy machinery enclosures.",specs:[["Material","CRCA / MS Sheet Steel"],["Thickness","1.6 mm – 3.0 mm"],["Finish","Powder Coat (multi-coat)"],["Max Size","2400 × 1200 mm"],["Bend Standard","DIN 6935"],["Hardware Options","Hinges, Latches, Gaskets"]],tags:["Large Format","Reinforced Bends","Multi-coat","DIN 6935","With Hardware"]},
-    "penal-004":{name:"Machine Panel & Cover (Set 4)",category:"Panels & Covers",images:["assets/images/products/MECH-PENAL-004.jpg","assets/images/products/MECH-PENAL-001.jpg"],desc:"Complete panel and cover assembly with powder coat finish, ready for electrical or control system integration.",specs:[["Material","CRCA Sheet Steel"],["Thickness","1.0 mm – 2.0 mm"],["Finish","Powder Coat (RAL custom)"],["Assembly","Panel + Cover + Rubber Seal"],["Process","Laser Cut, CNC Punch, Powder Coat"],["MOQ","Per drawing"]],tags:["Panel + Cover","Ready Assembly","Rubber Seal","Custom RAL","Complete Kit"]},
-    "cover-001":{name:"Terminal Cover — White Powder Coat",category:"Panels & Covers",images:["assets/images/products/MECH-COVER-001.jpg","assets/images/products/MECH-COVER-BATTERY-001.jpg"],desc:"White electrostatic powder-coated terminal cover. Snap-fit or screw-fixed variants available.",specs:[["Material","CRCA Sheet Steel"],["Finish","White Electrostatic Powder Coat"],["Colour","RAL 9016 Traffic White"],["Fixing Options","Snap-fit / M4 Screw"],["Thickness","0.8 mm – 1.2 mm"],["MOQ","100 pcs minimum"]],tags:["RAL 9016","White","Snap-fit","Screw-fix","Terminal Block"]},
-    "cover-bat":{name:"Battery Box with Holding Clamp",category:"Panels & Covers",images:["assets/images/products/MECH-COVER-BATTERY-001.jpg","assets/images/products/MECH-CLAMP-001.jpg"],desc:"White powder-coated battery enclosure with integrated metal clamp for UPS and control panel installations.",specs:[["Material","CRCA Sheet + Metal Clamp"],["Finish","White Powder Coat"],["Clamp Fit","Adjustable — 7 Ah to 42 Ah batteries"],["Fixing","M4 Screws (included)"],["Application","UPS, Control Panel, Automation"],["MOQ","50 pcs minimum"]],tags:["Battery Box","Integrated Clamp","UPS","White","Adjustable Fit"]},
-    "clamp-001":{name:"Battery & Panel Clamp",category:"Machined Parts",images:["assets/images/products/MECH-CLAMP-001.jpg","assets/images/products/MECH-COVER-BATTERY-001.jpg"],desc:"Precision sheet metal clamp for securing batteries and components inside control panels. Adjustable, multiple widths available.",specs:[["Material","CRCA Sheet Steel / Galvanised"],["Finish","Powder Coat / Zinc Plate"],["Width Range","40 mm – 150 mm"],["Sheet Thickness","1.5 mm – 2.0 mm"],["Fixing","M4 / M5 Bolts"],["MOQ","50 pcs"]],tags:["Adjustable","Powder Coat","Zinc Plate","Custom Width","Sheet Metal"]},
-    "cross-001":{name:"Crossover Fitting",category:"Machined Parts",images:["assets/images/products/MECH-CROSSOVER-001.jpg","assets/images/products/MECH-CROSSOVER-001-F.jpg","assets/images/products/MECH-CROSSOVER-002-M.jpg"],desc:"Precision-machined crossover fitting for fluid, gas, or pneumatic line assemblies. Available in brass, SS 304, SS 316.",specs:[["Material","Brass / SS 304 / SS 316"],["Process","CNC Turning"],["Thread Standard","BSP, NPT, Metric"],["Max Pressure","150 bar"],["Finish","Natural / Nickel / Chrome"],["Tolerance","±0.02 mm"]],tags:["BSP / NPT","150 bar","Brass / SS","Pneumatic","Hydraulic","Plumbing"]},
-    "cross-001f":{name:"Crossover Fitting — Female",category:"Machined Parts",images:["assets/images/products/MECH-CROSSOVER-001-F.jpg","assets/images/products/MECH-CROSSOVER-001.jpg"],desc:"Female-thread crossover fitting machined to tight tolerances for leak-free pipe and hose connections.",specs:[["Material","Brass / SS 304 / SS 316"],["Thread","Female — BSP / NPT / Metric"],["Max Pressure","150 bar"],["Sealing","PTFE Tape or O-Ring groove"],["Finish","Natural / Nickel"],["Tolerance","±0.01 mm"]],tags:["Female Thread","Leak-Free","BSP / NPT","PTFE Seal","O-Ring Groove"]},
-    "cross-002m":{name:"Crossover Fitting — Male",category:"Machined Parts",images:["assets/images/products/MECH-CROSSOVER-002-M.jpg","assets/images/products/MECH-CROSSOVER-001.jpg"],desc:"Male-thread crossover fitting for pneumatic, hydraulic, and plumbing systems. Nickel or zinc plated on request.",specs:[["Material","Brass / SS 304 / SS 316"],["Thread","Male — BSP / NPT / Metric"],["Max Pressure","150 bar"],["Finish","Nickel / Zinc Plated"],["Inspection","Dimensional + Pressure Test"],["MOQ","Per drawing"]],tags:["Male Thread","150 bar","Nickel / Zinc","Pressure Tested","Inspected"]},
-    "cross-004":{name:"Body Caps, Pin Joints & Nipples",category:"Machined Parts",images:["assets/images/products/MECH-CROSSOVER-004.jpg","assets/images/products/MECH-CROSSOVER-001.jpg"],desc:'2" Body Caps, Pin Joints, Nipples, and Choke Nipples for oil & gas, industrial valve assemblies, and fluid handling systems.',specs:[["Parts",'2" Body Cap, Pin Joints, Nipples, Choke Nipples'],["Material","Brass / SS 316 / Carbon Steel"],["Thread Standard","BSP / NPT / API"],["Max Pressure","200 bar"],["Finish","Natural / Zinc / Nickel"],["Certification","MTC on request"]],tags:["Body Cap","Nipple","Pin Joint","API Thread","Oil & Gas","200 bar"]},
-    "ss-sheet-001":{name:"Laser-Cut Stainless Steel Sheet",category:"SS & Rods",images:["assets/images/products/MECH-SS-SHEET-001.jpg"],desc:"Precision laser-cut SS 304 / SS 316 sheet metal parts in custom shapes for industrial and architectural applications. Burr-free edges.",specs:[["Material","SS 304 / SS 316 / SS 316L"],["Thickness","0.5 mm – 6.0 mm"],["Process","Fibre Laser Cut + Deburr"],["Tolerance","±0.1 mm"],["Max Sheet Size","3000 × 1500 mm"],["Finishes","Mill / 2B / BA / Hairline / Brushed"]],tags:["SS 304","SS 316","Laser Cut","Burr-Free","Custom Shape","Food Grade"]},
-    "rods-001":{name:"Stainless Steel Rods & Bars",category:"SS & Rods",images:["assets/images/products/MECH-RODS-001.jpg","assets/images/products/MECH-SS-SHEET-001.jpg"],desc:"SS 303, SS 304, and SS 316 round bars and rods available cut to length or in standard mill lengths.",specs:[["Material","SS 303 / SS 304 / SS 316"],["Diameter Range","3 mm – 200 mm"],["Lengths","Cut to length or 3 m / 6 m stock"],["Tolerance","h9 / h11 or per drawing"],["Surface","Bright Drawn / Ground / Peeled"],["Certification","EN 10204 3.1 MTC available"]],tags:["SS 303/304/316","Round Bar","Cut to Length","EN 10204 3.1","Bright Drawn"]},
-    "adjuster-top":{name:"Adjuster Ring — Top View",category:"Automotive",images:["assets/images/products/ADJUSTER_TOP_VIEW.png","assets/images/products/ADJUSTER_SIDE_VEIW.png","assets/images/products/ADJUSTER_AND_JOINT_PINS.png"],desc:"Precision sand-cast aluminium adjuster ring with internal threaded bore and castellated locking profile. Used in suspension preload adjustment and steering column clamps.",specs:[["Material","Aluminium Alloy (A380 / LM6)"],["Process","Sand Cast + CNC Machined"],["Thread","Internal — custom pitch per drawing"],["Profile","Castellated with 8 locking notches"],["Finish","Natural / Shot Blast"],["Tolerance","±0.05 mm on bore"],["Application","Suspension, Steering, Bearing"]],tags:["Cast Aluminium","Internal Thread","Castellated","Suspension","Steering","Bearing"]},
-    "adjuster-side":{name:"Adjuster Ring — Side View",category:"Automotive",images:["assets/images/products/ADJUSTER_SIDE_VEIW.png","assets/images/products/ADJUSTER_TOP_VIEW.png","assets/images/products/ADJUSTER_AND_JOINT_PINS.png"],desc:"Side profile of cast adjuster ring showing threaded bore depth and external castellated profile. Textured outer surface for grip.",specs:[["Material","Aluminium Alloy (A380 / LM6)"],["Process","Sand Cast + CNC Machined"],["Bore","Internally threaded to spec"],["Outer Profile","Castellated for spanner engagement"],["Finish","Natural / Shot Blast"],["MOQ","Per drawing"]],tags:["Cast Aluminium","Threaded Bore","Castellated","Spanner Fit","CNC Machined"]},
-    "adj-joint-pins":{name:"Adjuster Ring & Joint Pins Set",category:"Automotive",images:["assets/images/products/ADJUSTER_AND_JOINT_PINS.png","assets/images/products/ADJUSTER_TOP_VIEW.png","assets/images/products/ADJUSTER_SIDE_VEIW.png"],desc:"Complete set: adjuster ring with flanged joint pins (threaded studs, square base plates) and blind-end socket. For suspension linkage and track rod end assemblies.",specs:[["Parts","Adjuster Ring + 3× Joint Pins + 1× Socket"],["Material","Cast Aluminium + Mild Steel"],["Process","Casting + CNC Turning"],["Thread Std","Metric / BSP to drawing"],["Finish","Natural Cast / Zinc Plated"],["Application","Suspension Linkage, Track Rod End"]],tags:["Kit Set","Cast Al + Steel","Joint Pins","Suspension Linkage","Track Rod","Zinc Plated"]},
-    "eng-brackets":{name:"Engine & Bumper Support Brackets",category:"Automotive",images:["assets/images/products/ENGINE_AND_BUPER_SUPPORT_BRACKETS.png","assets/images/products/BUMPER_BRACKET.png"],desc:"High-precision HPDC aluminium structural brackets with hexagonal and triangular ribbed web geometry for maximum stiffness-to-weight ratio in engine bay and bumper mounting.",specs:[["Material","Aluminium Die-Cast (ADC12 / A380)"],["Process","High-Pressure Die Cast + CNC"],["Web Pattern","Hexagonal + Triangular ribs"],["Mounting","Multiple oval and round bolt holes"],["Finish","Natural / Anodised / Powder Coat"],["Weight Saving","Up to 40% vs steel equivalent"]],tags:["HPDC Aluminium","Ribbed Web","Engine Bracket","Bumper Support","Lightweight","ADC12"]},
-    "bumper-bracket":{name:"Bumper Bracket — Structural Support",category:"Automotive",images:["assets/images/products/BUMPER_BRACKET.png","assets/images/products/ENGINE_AND_BUPER_SUPPORT_BRACKETS.png"],desc:"Complex HPDC aluminium bumper support bracket with triangulated ribs, oval mounting slots, and multi-point attachment flanges for front and rear bumper beam assemblies.",specs:[["Material","Aluminium Die-Cast (ADC12)"],["Process","HPDC + CNC Machine"],["Key Features","Oval Slots, Triangulated Ribs, Multi-flange"],["Mounting Points","4–6 bolt positions"],["Finish","Natural / E-coat"],["Tolerance","±0.15 mm on datums"]],tags:["HPDC Aluminium","Bumper Beam","Oval Slots","E-coat","Multi-flange","ADC12"]},
-    "foot-grills":{name:"Foot Grills — Cross-Hatch Pattern",category:"Automotive",images:["assets/images/products/FOOT_GRILLS.png","assets/images/products/FOOTRESTS.png"],desc:"Lightweight aluminium die-cast foot grills with diamond cross-hatch open lattice pattern and integrated pivot pin hinge mechanism for foldable footrests or radiator grilles.",specs:[["Material","Aluminium Die-Cast"],["Process","Die Cast + Deburr + Finish"],["Pattern","Diamond Cross-Hatch Lattice"],["Hinge","Integrated pivot pin (Ø per spec)"],["Finish","Natural Al / Anodised / Painted"],["Application","Motorcycle Footrest, Radiator Grille"]],tags:["Die-Cast Al","Cross-Hatch Lattice","Pivot Hinge","Motorcycle","Foldable","Grille"]},
-    "footrests":{name:"Footrest — Anti-Slip Machined",category:"Automotive",images:["assets/images/products/FOOTRESTS.png","assets/images/products/FOOT_GRILLS.png"],desc:"Black anodised aluminium footrest with raised dot anti-slip tread surface and smooth upper mounting plate with pre-drilled holes for bolt-on fitment.",specs:[["Material","Aluminium Alloy"],["Process","CNC Machined + Anodise"],["Surface Finish","Black Anodised"],["Tread Pattern","Raised eyelet anti-slip dots"],["Mounting","Pre-drilled holes — bolt-on"],["Application","Dead Pedal, Step, Floor Rest"]],tags:["Black Anodised","Anti-Slip","Dead Pedal","CNC Machined","Bolt-On","Floor Rest"]},
-    "pins-sockets":{name:"Pins & Sockets — Flanged Bush",category:"Automotive",images:["assets/images/products/PINS_SOCKETS.png"],desc:"Precision-turned flanged socket bushings in carbon steel with internal tapered thread bore. Used as weld-in inserts, pivot pin housings, and suspension bush sockets.",specs:[["Material","Carbon Steel (EN8 / EN19)"],["Process","CNC Turning + Thread"],["Finish","Black Oxide / Zinc Phosphate"],["Thread","Internal — Metric / BSP to drawing"],["Flange","Wide flange for load distribution"],["Application","Weld-in Insert, Pivot Housing, Rod End"]],tags:["Carbon Steel","Flanged Bush","Black Oxide","Weld-in","Pivot Housing","Rod End"]},
-    "piston-head":{name:"Piston Head — Flanged Disc",category:"Automotive",images:["assets/images/products/PISTON_HEAD.png","assets/images/products/PISTONS_SIDE_VIEW.png","assets/images/products/small_pistons.png"],desc:"Precision CNC-turned aluminium piston heads with concentric O-ring groove and centre bore. Used in hydraulic cylinders, pneumatic actuators, and damper assemblies.",specs:[["Material","Aluminium Alloy / SS 303"],["Process","CNC Turning"],["Groove","Concentric O-ring / seal groove"],["Centre Bore","Per drawing (blind or through)"],["Finish","Natural / Hard Anodised"],["Seal","O-ring groove to BS 1806 / DIN 3771"]],tags:["CNC Turned","O-ring Groove","Hydraulic","Pneumatic","Damper","Hard Anodised"]},
-    "pistons-side":{name:"Piston Assembly — Side View",category:"Automotive",images:["assets/images/products/PISTONS_SIDE_VIEW.png","assets/images/products/PISTON_HEAD.png","assets/images/products/small_pistons.png"],desc:"Side profile showing stepped shoulder piston assemblies with groove ring and hollow bore for cylinder rod-end positioning.",specs:[["Material","Aluminium Alloy / SS 303"],["Process","CNC Turning"],["Design","Stepped shoulder + groove ring"],["Bore","Hollow — through or blind per spec"],["Tolerance","±0.01 mm on OD"],["Finish","Natural / Hard Anodised"]],tags:["Stepped Shoulder","Groove Ring","Cylinder Rod-End","CNC Turned","Aluminium / SS"]},
-    "small-pistons":{name:"Small Pistons — Miniature Turned",category:"Automotive",images:["assets/images/products/small_pistons.png","assets/images/products/PISTON_HEAD.png","assets/images/products/PISTONS_SIDE_VIEW.png"],desc:"Compact CNC-turned SS piston bodies with flanged cap and hollow bore for miniature hydraulic actuators, shock absorbers, and precision fluid control.",specs:[["Material","SS 303 / SS 304 / Aluminium"],["Process","CNC Turning"],["Diameter","8 mm – 40 mm (custom)"],["Length","10 mm – 80 mm (custom)"],["Finish","Natural / Hard Anodised / Polished"],["Application","Shock Absorber, Mini Actuator, Valve"]],tags:["Miniature","SS 303/304","Shock Absorber","Fluid Control","CNC Turned","Compact"]},
-    "side-brackets":{name:"Side Brackets — Die-Cast Structural",category:"Automotive",images:["assets/images/products/SIDE_BRACKETS.png","assets/images/products/ENGINE_AND_BUPER_SUPPORT_BRACKETS.png"],desc:"Matched pair of HPDC aluminium side brackets with ribbed underside, curved upper rail profile, and integrated mounting flanges for seat rail or console mounting.",specs:[["Material","Aluminium Die-Cast (ADC12)"],["Process","HPDC + CNC + Deburr"],["Design","Mirror-pair (Left + Right)"],["Features","Ribbed underside, mounting flanges"],["Finish","Natural / Anodised / Powder Coat"],["Tolerance","±0.1 mm on datums"]],tags:["Mirror Pair","HPDC Al","Seat Rail","Ribbed","Console Mount","ADC12"]},
-    "spindles":{name:"Spindles & Pin Sockets",category:"Automotive",images:["assets/images/products/SPINDLES.png","assets/images/products/PINS_SOCKETS.png"],desc:"Brass cylindrical spacer sleeves and precision splined spindle with hex drive head and knurled collar for gear linkage pivot pins and window regulators.",specs:[["Material","Brass (CZ121) / Zinc-Plated Steel"],["Process","CNC Turning + Knurl + Thread"],["Parts","Cylindrical Spacers + Splined Spindle"],["Spindle Drive","Hex head + knurled collar"],["Finish","Natural Brass / Zinc Plate / Gold Plate"],["Application","Electrical Connector, Gear Linkage, Window Regulator"]],tags:["Brass","Splined Spindle","Knurled","Zinc Plated","Gear Linkage","Window Regulator"]}
-  };
+    const PRODUCTS = {
+      "bid-001b": { name: "Rubber Beading — Black (Type 1)", category: "Rubber Beading", images: ["assets/images/products/MECH-BIDDING-001B.jpg", "assets/images/products/MECH-BIDDING-002B.jpg"], desc: "Flexible black EPDM rubber beading for edge finishing, sealing, and vibration dampening in machine panels and enclosures. Supplied in rolls or cut to length.", specs: [["Material", "EPDM Rubber (Black)"], ["Profile", "U-Channel / Edge Trim"], ["Sheet Fit", "0.8 mm – 4 mm"], ["Hardness", "60 ± 5 Shore A"], ["Temp. Range", "-40°C to +120°C"], ["Supply Form", "Roll / Cut to Length"], ["Certification", "RoHS Compliant"]], tags: ["EPDM", "Black", "U-Channel", "RoHS", "Custom Sizes"] },
+      "bid-001w": { name: "Rubber Beading — White (Type 1)", category: "Rubber Beading", images: ["assets/images/products/MECH-BIDDING-001W.jpg", "assets/images/products/MECH-BIDDING-002W.jpg"], desc: "White EPDM rubber beading for clean edge protection on control panels and machine frames.", specs: [["Material", "EPDM Rubber (White)"], ["Profile", "U-Channel / Edge Trim"], ["Sheet Fit", "0.8 mm – 3 mm"], ["Hardness", "60 ± 5 Shore A"], ["Temp. Range", "-40°C to +120°C"], ["Supply Form", "Roll / Cut to Length"], ["Certification", "RoHS Compliant"]], tags: ["EPDM", "White", "U-Channel", "RoHS", "Temperature Resistant"] },
+      "bid-001c": { name: "Rubber Beading — Colour Range", category: "Rubber Beading", images: ["assets/images/products/MECH-BIDDING-001C.jpg"], desc: "Available in black, white, and grey across U-Channel, P-Profile, and D-Profile cross-sections. OEM private-label packaging available.", specs: [["Material", "EPDM / NBR Rubber"], ["Colours", "Black, White, Grey"], ["Profiles", "U-Channel, P-Profile, D-Profile"], ["Sheet Fit", "0.5 mm – 5 mm"], ["MOQ", "As per profile / colour"], ["Lead Time", "3–6 weeks"]], tags: ["Multi-colour", "EPDM / NBR", "Various Profiles", "OEM Available"] },
+      "bid-002b": { name: "Rubber Beading — Black (Type 2)", category: "Rubber Beading", images: ["assets/images/products/MECH-BIDDING-002B.jpg", "assets/images/products/MECH-BIDDING-001B.jpg"], desc: "Heavy-duty black rubber edge beading with wider profile for thicker sheet metal panels up to 5 mm.", specs: [["Material", "EPDM Rubber (Black)"], ["Profile", "Wide U-Channel"], ["Sheet Fit", "2 mm – 5 mm"], ["Hardness", "65 ± 5 Shore A"], ["Temp. Range", "-30°C to +110°C"], ["Supply Form", "Roll / Cut to Length"]], tags: ["Black", "Heavy Duty", "Wide Profile", "5 mm Panels"] },
+      "bid-002w": { name: "Rubber Beading — White (Type 2)", category: "Rubber Beading", images: ["assets/images/products/MECH-BIDDING-002W.jpg", "assets/images/products/MECH-BIDDING-001W.jpg"], desc: "Wide-profile white beading for electrical enclosures. IP54-compatible sealing when properly fitted.", specs: [["Material", "EPDM Rubber (White)"], ["Profile", "Wide U-Channel"], ["Sheet Fit", "2 mm – 4 mm"], ["IP Rating", "IP54 compatible when fitted"], ["Hardness", "60 ± 5 Shore A"], ["Supply Form", "Roll / Cut to Length"]], tags: ["White", "Wide Profile", "IP54", "Dust Seal", "Moisture Protection"] },
+      "bid-003w": { name: "Rubber Beading — White (Type 3)", category: "Rubber Beading", images: ["assets/images/products/MECH-BIDDING-003W.jpg"], desc: "Slim-profile white beading for precision applications in consumer electronics and medical equipment.", specs: [["Material", "EPDM Rubber (White)"], ["Profile", "Slim U-Channel"], ["Sheet Fit", "0.5 mm – 1.5 mm"], ["Application", "Electronics, Medical Equipment"], ["Hardness", "55 ± 5 Shore A"], ["Supply Form", "Roll / Cut to Length"]], tags: ["White", "Slim Profile", "Precision Fit", "Medical Grade", "Electronics"] },
+      "bid-004": { name: "Rubber Beading — Type 4", category: "Rubber Beading", images: ["assets/images/products/MECH-BIDDING-004.jpg"], desc: "Specialised rubber beading with unique cross-section for curved or irregular edge profiles and automotive body trim.", specs: [["Material", "EPDM / NBR Rubber"], ["Profile", "Special / Curved Edge"], ["Flexibility", "High — suited for curves"], ["Application", "Automotive, Curved Panels"], ["MOQ", "As per order"], ["Lead Time", "4–6 weeks"]], tags: ["Special Profile", "Curved Edge", "Automotive", "High Flexibility"] },
+      "bid-005": { name: "Rubber Beading — Type 5", category: "Rubber Beading", images: ["assets/images/products/MECH-BIDDING-005.jpg"], desc: "Multipurpose rubber beading strip for automotive, industrial, and consumer electronics. Bulk roll supply for OEM manufacturers.", specs: [["Material", "EPDM Rubber"], ["Profile", "D-Profile / P-Profile"], ["Application", "Automotive, Industrial, Electronics"], ["Supply Form", "Bulk Roll"], ["MOQ", "100 m minimum"], ["Certification", "RoHS Compliant"]], tags: ["Multipurpose", "Automotive Grade", "Bulk Roll", "OEM", "D-Profile"] },
+      "brass-001": { name: "Brass Machined Components — Set A", category: "Brass Components", images: ["assets/images/products/MECH-BRASS-001.jpg", "assets/images/products/MECH-BRASS-002.jpg"], desc: "Precision CNC-turned brass components including fittings, inserts, and connectors to IS 319 Grade I/II. Mirror finish, no burrs.", specs: [["Material", "Brass IS 319 Grade I / II"], ["Process", "CNC Turning / Milling"], ["Finish", "Natural Brass / Nickel Plated"], ["Tolerance", "±0.01 mm"], ["Inspection", "100% Dimensional Check"], ["Certification", "Mill Test Certificate available"]], tags: ["IS 319", "CNC Turned", "Mirror Polish", "No Burrs", "MTC"] },
+      "brass-002": { name: "Brass Machined Components — Set B", category: "Brass Components", images: ["assets/images/products/MECH-BRASS-002.jpg", "assets/images/products/MECH-BRASS-003.jpg"], desc: "EN 12164 CW614N / CW617N grade brass — nuts, bolts, nipples, and custom turned parts for electrical and plumbing applications.", specs: [["Material", "Brass EN 12164 CW614N / CW617N"], ["Process", "CNC Turning"], ["Finish", "Nickel / Chrome Plated"], ["Thread Standard", "BSP, NPT, Metric"], ["Tolerance", "±0.01 mm"], ["Certification", "MTC on request"]], tags: ["EN 12164 CW614N", "Nickel Plated", "Chrome", "BSP / NPT", "OEM"] },
+      "brass-003": { name: "Brass Machined Components — Set C", category: "Brass Components", images: ["assets/images/products/MECH-BRASS-003.jpg", "assets/images/products/MECH-BRASS-004.jpg"], desc: "BS 2874 CZ121 / CZ122 free-machining brass with polished mirror surface for high-volume precision parts.", specs: [["Material", "Brass BS 2874 CZ121 / CZ122"], ["Process", "CNC Turning, Auto-Lathe"], ["Finish", "Mirror Polished / Tin Plated"], ["Surface", "Burr-free, defect-free"], ["Tolerance", "±0.005 mm"], ["MOQ", "500 pcs minimum"]], tags: ["BS 2874 CZ121", "Mirror Polish", "Tin Plated", "High Volume", "Automotive"] },
+      "brass-004": { name: "Brass Machined Components — Set D", category: "Brass Components", images: ["assets/images/products/MECH-BRASS-004.jpg", "assets/images/products/MECH-BRASS-001.jpg"], desc: "ASTM B16 C36000 free-cutting brass — fittings, terminals, and precision assemblies to customer CAD / drawings.", specs: [["Material", "Brass ASTM B16 C36000"], ["Process", "CNC Turning / Swiss-Type Lathe"], ["Finish", "Chrome, Tin, Zinc, Silver, Gold"], ["Tolerance", "±0.01 mm or per drawing"], ["Lead Time", "4–8 weeks"], ["Certification", "RoHS, REACH on request"]], tags: ["ASTM B16", "Multi-Finish", "CAD Driven", "RoHS", "REACH"] },
+      "penal-001": { name: "Machine Panel — Powder Coat (Set 1)", category: "Panels & Covers", images: ["assets/images/products/MECH-PENAL-001.jpg", "assets/images/products/MECH-PENAL-002.jpg"], desc: "CRCA sheet metal machine panel with electrostatic powder coat finish and custom cut-outs to customer drawing.", specs: [["Material", "CRCA Sheet Steel"], ["Thickness", "1.0 mm – 3.0 mm"], ["Finish", "Electrostatic Powder Coat"], ["Standard Colour", "RAL 7032 (custom available)"], ["Process", "Laser Cut, CNC Punch, Bend, Weld"], ["IP Compatibility", "IP54 / IP65 enclosures"]], tags: ["CRCA Steel", "Powder Coat", "CNC Punch", "IP54/65", "Custom Cut-outs"] },
+      "penal-002": { name: "Machine Panel — Powder Coat (Set 2)", category: "Panels & Covers", images: ["assets/images/products/MECH-PENAL-002.jpg", "assets/images/products/MECH-PENAL-003.jpg"], desc: "Formed and punched machine panel with DIN rail mounting provisions and cable entry knockouts.", specs: [["Material", "CRCA / GI Sheet Steel"], ["Thickness", "1.2 mm – 2.0 mm"], ["Finish", "Powder Coat RAL 7035 (standard)"], ["Features", "DIN Rail, Cable Knockouts"], ["Process", "CNC Punch, Brake Press, Weld"], ["MOQ", "Per drawing"]], tags: ["DIN Rail", "PLC Enclosure", "GI / CRCA", "Brake Press", "RAL 7035"] },
+      "penal-003": { name: "Machine Panel — Powder Coat (Set 3)", category: "Panels & Covers", images: ["assets/images/products/MECH-PENAL-003.jpg", "assets/images/products/MECH-PENAL-004.jpg"], desc: "Large-format machine panel with multi-zone punching and reinforced bends for heavy machinery enclosures.", specs: [["Material", "CRCA / MS Sheet Steel"], ["Thickness", "1.6 mm – 3.0 mm"], ["Finish", "Powder Coat (multi-coat)"], ["Max Size", "2400 × 1200 mm"], ["Bend Standard", "DIN 6935"], ["Hardware Options", "Hinges, Latches, Gaskets"]], tags: ["Large Format", "Reinforced Bends", "Multi-coat", "DIN 6935", "With Hardware"] },
+      "penal-004": { name: "Machine Panel & Cover (Set 4)", category: "Panels & Covers", images: ["assets/images/products/MECH-PENAL-004.jpg", "assets/images/products/MECH-PENAL-001.jpg"], desc: "Complete panel and cover assembly with powder coat finish, ready for electrical or control system integration.", specs: [["Material", "CRCA Sheet Steel"], ["Thickness", "1.0 mm – 2.0 mm"], ["Finish", "Powder Coat (RAL custom)"], ["Assembly", "Panel + Cover + Rubber Seal"], ["Process", "Laser Cut, CNC Punch, Powder Coat"], ["MOQ", "Per drawing"]], tags: ["Panel + Cover", "Ready Assembly", "Rubber Seal", "Custom RAL", "Complete Kit"] },
+      "cover-001": { name: "Terminal Cover — White Powder Coat", category: "Panels & Covers", images: ["assets/images/products/MECH-COVER-001.jpg", "assets/images/products/MECH-COVER-BATTERY-001.jpg"], desc: "White electrostatic powder-coated terminal cover. Snap-fit or screw-fixed variants available.", specs: [["Material", "CRCA Sheet Steel"], ["Finish", "White Electrostatic Powder Coat"], ["Colour", "RAL 9016 Traffic White"], ["Fixing Options", "Snap-fit / M4 Screw"], ["Thickness", "0.8 mm – 1.2 mm"], ["MOQ", "100 pcs minimum"]], tags: ["RAL 9016", "White", "Snap-fit", "Screw-fix", "Terminal Block"] },
+      "cover-bat": { name: "Battery Box with Holding Clamp", category: "Panels & Covers", images: ["assets/images/products/MECH-COVER-BATTERY-001.jpg", "assets/images/products/MECH-CLAMP-001.jpg"], desc: "White powder-coated battery enclosure with integrated metal clamp for UPS and control panel installations.", specs: [["Material", "CRCA Sheet + Metal Clamp"], ["Finish", "White Powder Coat"], ["Clamp Fit", "Adjustable — 7 Ah to 42 Ah batteries"], ["Fixing", "M4 Screws (included)"], ["Application", "UPS, Control Panel, Automation"], ["MOQ", "50 pcs minimum"]], tags: ["Battery Box", "Integrated Clamp", "UPS", "White", "Adjustable Fit"] },
+      "clamp-001": { name: "Battery & Panel Clamp", category: "Machined Parts", images: ["assets/images/products/MECH-CLAMP-001.jpg", "assets/images/products/MECH-COVER-BATTERY-001.jpg"], desc: "Precision sheet metal clamp for securing batteries and components inside control panels. Adjustable, multiple widths available.", specs: [["Material", "CRCA Sheet Steel / Galvanised"], ["Finish", "Powder Coat / Zinc Plate"], ["Width Range", "40 mm – 150 mm"], ["Sheet Thickness", "1.5 mm – 2.0 mm"], ["Fixing", "M4 / M5 Bolts"], ["MOQ", "50 pcs"]], tags: ["Adjustable", "Powder Coat", "Zinc Plate", "Custom Width", "Sheet Metal"] },
+      "cross-001": { name: "Crossover Fitting", category: "Machined Parts", images: ["assets/images/products/MECH-CROSSOVER-001.jpg", "assets/images/products/MECH-CROSSOVER-001-F.jpg", "assets/images/products/MECH-CROSSOVER-002-M.jpg"], desc: "Precision-machined crossover fitting for fluid, gas, or pneumatic line assemblies. Available in brass, SS 304, SS 316.", specs: [["Material", "Brass / SS 304 / SS 316"], ["Process", "CNC Turning"], ["Thread Standard", "BSP, NPT, Metric"], ["Max Pressure", "150 bar"], ["Finish", "Natural / Nickel / Chrome"], ["Tolerance", "±0.02 mm"]], tags: ["BSP / NPT", "150 bar", "Brass / SS", "Pneumatic", "Hydraulic", "Plumbing"] },
+      "cross-001f": { name: "Crossover Fitting — Female", category: "Machined Parts", images: ["assets/images/products/MECH-CROSSOVER-001-F.jpg", "assets/images/products/MECH-CROSSOVER-001.jpg"], desc: "Female-thread crossover fitting machined to tight tolerances for leak-free pipe and hose connections.", specs: [["Material", "Brass / SS 304 / SS 316"], ["Thread", "Female — BSP / NPT / Metric"], ["Max Pressure", "150 bar"], ["Sealing", "PTFE Tape or O-Ring groove"], ["Finish", "Natural / Nickel"], ["Tolerance", "±0.01 mm"]], tags: ["Female Thread", "Leak-Free", "BSP / NPT", "PTFE Seal", "O-Ring Groove"] },
+      "cross-002m": { name: "Crossover Fitting — Male", category: "Machined Parts", images: ["assets/images/products/MECH-CROSSOVER-002-M.jpg", "assets/images/products/MECH-CROSSOVER-001.jpg"], desc: "Male-thread crossover fitting for pneumatic, hydraulic, and plumbing systems. Nickel or zinc plated on request.", specs: [["Material", "Brass / SS 304 / SS 316"], ["Thread", "Male — BSP / NPT / Metric"], ["Max Pressure", "150 bar"], ["Finish", "Nickel / Zinc Plated"], ["Inspection", "Dimensional + Pressure Test"], ["MOQ", "Per drawing"]], tags: ["Male Thread", "150 bar", "Nickel / Zinc", "Pressure Tested", "Inspected"] },
+      "cross-004": { name: "Body Caps, Pin Joints & Nipples", category: "Machined Parts", images: ["assets/images/products/MECH-CROSSOVER-004.jpg", "assets/images/products/MECH-CROSSOVER-001.jpg"], desc: '2" Body Caps, Pin Joints, Nipples, and Choke Nipples for oil & gas, industrial valve assemblies, and fluid handling systems.', specs: [["Parts", '2" Body Cap, Pin Joints, Nipples, Choke Nipples'], ["Material", "Brass / SS 316 / Carbon Steel"], ["Thread Standard", "BSP / NPT / API"], ["Max Pressure", "200 bar"], ["Finish", "Natural / Zinc / Nickel"], ["Certification", "MTC on request"]], tags: ["Body Cap", "Nipple", "Pin Joint", "API Thread", "Oil & Gas", "200 bar"] },
+      "ss-sheet-001": { name: "Laser-Cut Stainless Steel Sheet", category: "SS & Rods", images: ["assets/images/products/MECH-SS-SHEET-001.jpg"], desc: "Precision laser-cut SS 304 / SS 316 sheet metal parts in custom shapes for industrial and architectural applications. Burr-free edges.", specs: [["Material", "SS 304 / SS 316 / SS 316L"], ["Thickness", "0.5 mm – 6.0 mm"], ["Process", "Fibre Laser Cut + Deburr"], ["Tolerance", "±0.1 mm"], ["Max Sheet Size", "3000 × 1500 mm"], ["Finishes", "Mill / 2B / BA / Hairline / Brushed"]], tags: ["SS 304", "SS 316", "Laser Cut", "Burr-Free", "Custom Shape", "Food Grade"] },
+      "rods-001": { name: "Stainless Steel Rods & Bars", category: "SS & Rods", images: ["assets/images/products/MECH-RODS-001.jpg", "assets/images/products/MECH-SS-SHEET-001.jpg"], desc: "SS 303, SS 304, and SS 316 round bars and rods available cut to length or in standard mill lengths.", specs: [["Material", "SS 303 / SS 304 / SS 316"], ["Diameter Range", "3 mm – 200 mm"], ["Lengths", "Cut to length or 3 m / 6 m stock"], ["Tolerance", "h9 / h11 or per drawing"], ["Surface", "Bright Drawn / Ground / Peeled"], ["Certification", "EN 10204 3.1 MTC available"]], tags: ["SS 303/304/316", "Round Bar", "Cut to Length", "EN 10204 3.1", "Bright Drawn"] },
+      "adjuster-top": { name: "Adjuster Ring — Top View", category: "Automotive", images: ["assets/images/products/ADJUSTER_TOP_VIEW.png", "assets/images/products/ADJUSTER_SIDE_VEIW.png", "assets/images/products/ADJUSTER_AND_JOINT_PINS.png"], desc: "Precision sand-cast aluminium adjuster ring with internal threaded bore and castellated locking profile. Used in suspension preload adjustment and steering column clamps.", specs: [["Material", "Aluminium Alloy (A380 / LM6)"], ["Process", "Sand Cast + CNC Machined"], ["Thread", "Internal — custom pitch per drawing"], ["Profile", "Castellated with 8 locking notches"], ["Finish", "Natural / Shot Blast"], ["Tolerance", "±0.05 mm on bore"], ["Application", "Suspension, Steering, Bearing"]], tags: ["Cast Aluminium", "Internal Thread", "Castellated", "Suspension", "Steering", "Bearing"] },
+      "adjuster-side": { name: "Adjuster Ring — Side View", category: "Automotive", images: ["assets/images/products/ADJUSTER_SIDE_VEIW.png", "assets/images/products/ADJUSTER_TOP_VIEW.png", "assets/images/products/ADJUSTER_AND_JOINT_PINS.png"], desc: "Side profile of cast adjuster ring showing threaded bore depth and external castellated profile. Textured outer surface for grip.", specs: [["Material", "Aluminium Alloy (A380 / LM6)"], ["Process", "Sand Cast + CNC Machined"], ["Bore", "Internally threaded to spec"], ["Outer Profile", "Castellated for spanner engagement"], ["Finish", "Natural / Shot Blast"], ["MOQ", "Per drawing"]], tags: ["Cast Aluminium", "Threaded Bore", "Castellated", "Spanner Fit", "CNC Machined"] },
+      "adj-joint-pins": { name: "Adjuster Ring & Joint Pins Set", category: "Automotive", images: ["assets/images/products/ADJUSTER_AND_JOINT_PINS.png", "assets/images/products/ADJUSTER_TOP_VIEW.png", "assets/images/products/ADJUSTER_SIDE_VEIW.png"], desc: "Complete set: adjuster ring with flanged joint pins (threaded studs, square base plates) and blind-end socket. For suspension linkage and track rod end assemblies.", specs: [["Parts", "Adjuster Ring + 3× Joint Pins + 1× Socket"], ["Material", "Cast Aluminium + Mild Steel"], ["Process", "Casting + CNC Turning"], ["Thread Std", "Metric / BSP to drawing"], ["Finish", "Natural Cast / Zinc Plated"], ["Application", "Suspension Linkage, Track Rod End"]], tags: ["Kit Set", "Cast Al + Steel", "Joint Pins", "Suspension Linkage", "Track Rod", "Zinc Plated"] },
+      "eng-brackets": { name: "Engine & Bumper Support Brackets", category: "Automotive", images: ["assets/images/products/ENGINE_AND_BUPER_SUPPORT_BRACKETS.png", "assets/images/products/BUMPER_BRACKET.png"], desc: "High-precision HPDC aluminium structural brackets with hexagonal and triangular ribbed web geometry for maximum stiffness-to-weight ratio in engine bay and bumper mounting.", specs: [["Material", "Aluminium Die-Cast (ADC12 / A380)"], ["Process", "High-Pressure Die Cast + CNC"], ["Web Pattern", "Hexagonal + Triangular ribs"], ["Mounting", "Multiple oval and round bolt holes"], ["Finish", "Natural / Anodised / Powder Coat"], ["Weight Saving", "Up to 40% vs steel equivalent"]], tags: ["HPDC Aluminium", "Ribbed Web", "Engine Bracket", "Bumper Support", "Lightweight", "ADC12"] },
+      "bumper-bracket": { name: "Bumper Bracket — Structural Support", category: "Automotive", images: ["assets/images/products/BUMPER_BRACKET.png", "assets/images/products/ENGINE_AND_BUPER_SUPPORT_BRACKETS.png"], desc: "Complex HPDC aluminium bumper support bracket with triangulated ribs, oval mounting slots, and multi-point attachment flanges for front and rear bumper beam assemblies.", specs: [["Material", "Aluminium Die-Cast (ADC12)"], ["Process", "HPDC + CNC Machine"], ["Key Features", "Oval Slots, Triangulated Ribs, Multi-flange"], ["Mounting Points", "4–6 bolt positions"], ["Finish", "Natural / E-coat"], ["Tolerance", "±0.15 mm on datums"]], tags: ["HPDC Aluminium", "Bumper Beam", "Oval Slots", "E-coat", "Multi-flange", "ADC12"] },
+      "foot-grills": { name: "Foot Grills — Cross-Hatch Pattern", category: "Automotive", images: ["assets/images/products/FOOT_GRILLS.png", "assets/images/products/FOOTRESTS.png"], desc: "Lightweight aluminium die-cast foot grills with diamond cross-hatch open lattice pattern and integrated pivot pin hinge mechanism for foldable footrests or radiator grilles.", specs: [["Material", "Aluminium Die-Cast"], ["Process", "Die Cast + Deburr + Finish"], ["Pattern", "Diamond Cross-Hatch Lattice"], ["Hinge", "Integrated pivot pin (Ø per spec)"], ["Finish", "Natural Al / Anodised / Painted"], ["Application", "Motorcycle Footrest, Radiator Grille"]], tags: ["Die-Cast Al", "Cross-Hatch Lattice", "Pivot Hinge", "Motorcycle", "Foldable", "Grille"] },
+      "footrests": { name: "Footrest — Anti-Slip Machined", category: "Automotive", images: ["assets/images/products/FOOTRESTS.png", "assets/images/products/FOOT_GRILLS.png"], desc: "Black anodised aluminium footrest with raised dot anti-slip tread surface and smooth upper mounting plate with pre-drilled holes for bolt-on fitment.", specs: [["Material", "Aluminium Alloy"], ["Process", "CNC Machined + Anodise"], ["Surface Finish", "Black Anodised"], ["Tread Pattern", "Raised eyelet anti-slip dots"], ["Mounting", "Pre-drilled holes — bolt-on"], ["Application", "Dead Pedal, Step, Floor Rest"]], tags: ["Black Anodised", "Anti-Slip", "Dead Pedal", "CNC Machined", "Bolt-On", "Floor Rest"] },
+      "pins-sockets": { name: "Pins & Sockets — Flanged Bush", category: "Automotive", images: ["assets/images/products/PINS_SOCKETS.png"], desc: "Precision-turned flanged socket bushings in carbon steel with internal tapered thread bore. Used as weld-in inserts, pivot pin housings, and suspension bush sockets.", specs: [["Material", "Carbon Steel (EN8 / EN19)"], ["Process", "CNC Turning + Thread"], ["Finish", "Black Oxide / Zinc Phosphate"], ["Thread", "Internal — Metric / BSP to drawing"], ["Flange", "Wide flange for load distribution"], ["Application", "Weld-in Insert, Pivot Housing, Rod End"]], tags: ["Carbon Steel", "Flanged Bush", "Black Oxide", "Weld-in", "Pivot Housing", "Rod End"] },
+      "piston-head": { name: "Piston Head — Flanged Disc", category: "Automotive", images: ["assets/images/products/PISTON_HEAD.png", "assets/images/products/PISTONS_SIDE_VIEW.png", "assets/images/products/small_pistons.png"], desc: "Precision CNC-turned aluminium piston heads with concentric O-ring groove and centre bore. Used in hydraulic cylinders, pneumatic actuators, and damper assemblies.", specs: [["Material", "Aluminium Alloy / SS 303"], ["Process", "CNC Turning"], ["Groove", "Concentric O-ring / seal groove"], ["Centre Bore", "Per drawing (blind or through)"], ["Finish", "Natural / Hard Anodised"], ["Seal", "O-ring groove to BS 1806 / DIN 3771"]], tags: ["CNC Turned", "O-ring Groove", "Hydraulic", "Pneumatic", "Damper", "Hard Anodised"] },
+      "pistons-side": { name: "Piston Assembly — Side View", category: "Automotive", images: ["assets/images/products/PISTONS_SIDE_VIEW.png", "assets/images/products/PISTON_HEAD.png", "assets/images/products/small_pistons.png"], desc: "Side profile showing stepped shoulder piston assemblies with groove ring and hollow bore for cylinder rod-end positioning.", specs: [["Material", "Aluminium Alloy / SS 303"], ["Process", "CNC Turning"], ["Design", "Stepped shoulder + groove ring"], ["Bore", "Hollow — through or blind per spec"], ["Tolerance", "±0.01 mm on OD"], ["Finish", "Natural / Hard Anodised"]], tags: ["Stepped Shoulder", "Groove Ring", "Cylinder Rod-End", "CNC Turned", "Aluminium / SS"] },
+      "small-pistons": { name: "Small Pistons — Miniature Turned", category: "Automotive", images: ["assets/images/products/small_pistons.png", "assets/images/products/PISTON_HEAD.png", "assets/images/products/PISTONS_SIDE_VIEW.png"], desc: "Compact CNC-turned SS piston bodies with flanged cap and hollow bore for miniature hydraulic actuators, shock absorbers, and precision fluid control.", specs: [["Material", "SS 303 / SS 304 / Aluminium"], ["Process", "CNC Turning"], ["Diameter", "8 mm – 40 mm (custom)"], ["Length", "10 mm – 80 mm (custom)"], ["Finish", "Natural / Hard Anodised / Polished"], ["Application", "Shock Absorber, Mini Actuator, Valve"]], tags: ["Miniature", "SS 303/304", "Shock Absorber", "Fluid Control", "CNC Turned", "Compact"] },
+      "side-brackets": { name: "Side Brackets — Die-Cast Structural", category: "Automotive", images: ["assets/images/products/SIDE_BRACKETS.png", "assets/images/products/ENGINE_AND_BUPER_SUPPORT_BRACKETS.png"], desc: "Matched pair of HPDC aluminium side brackets with ribbed underside, curved upper rail profile, and integrated mounting flanges for seat rail or console mounting.", specs: [["Material", "Aluminium Die-Cast (ADC12)"], ["Process", "HPDC + CNC + Deburr"], ["Design", "Mirror-pair (Left + Right)"], ["Features", "Ribbed underside, mounting flanges"], ["Finish", "Natural / Anodised / Powder Coat"], ["Tolerance", "±0.1 mm on datums"]], tags: ["Mirror Pair", "HPDC Al", "Seat Rail", "Ribbed", "Console Mount", "ADC12"] },
+      "spindles": { name: "Spindles & Pin Sockets", category: "Automotive", images: ["assets/images/products/SPINDLES.png", "assets/images/products/PINS_SOCKETS.png"], desc: "Brass cylindrical spacer sleeves and precision splined spindle with hex drive head and knurled collar for gear linkage pivot pins and window regulators.", specs: [["Material", "Brass (CZ121) / Zinc-Plated Steel"], ["Process", "CNC Turning + Knurl + Thread"], ["Parts", "Cylindrical Spacers + Splined Spindle"], ["Spindle Drive", "Hex head + knurled collar"], ["Finish", "Natural Brass / Zinc Plate / Gold Plate"], ["Application", "Electrical Connector, Gear Linkage, Window Regulator"]], tags: ["Brass", "Splined Spindle", "Knurled", "Zinc Plated", "Gear Linkage", "Window Regulator"] }
+    };
 
-  const modal=document.getElementById("productModal"),modalMain=document.getElementById("modalMainImg");
-  function openModal(id){
-    const p=PRODUCTS[id]; if(!p) return;
-    document.getElementById("modalBadge").textContent=p.category;
-    document.getElementById("modalTitle").textContent=p.name;
-    document.getElementById("modalDesc").textContent=p.desc;
-    document.getElementById("modalSpecRows").innerHTML=p.specs.map(([k,v])=>`<div class="spec-row"><span class="spec-key">${k}</span><span class="spec-val">${v}</span></div>`).join("");
-    document.getElementById("modalTags").innerHTML=p.tags.map(t=>`<span class="modal-tag">${t}</span>`).join("");
-    modalMain.src=p.images[0]; modalMain.alt=p.name;
-    document.getElementById("modalThumbs").innerHTML=p.images.length>1?p.images.map((src,i)=>`<div class="modal-thumb ${i===0?"active":""}" data-src="${src}"><img src="${src}" alt="View ${i+1}"></div>`).join(""):"";
-    modal.classList.add("open"); document.body.classList.add("no-scroll");
-  }
-  // Expose globally so script.js delegated handler can call openModal on pg-card click
-  window.openModal = openModal;
-  // Open modal on card click (delegated via script.js handles close/thumbs)
-  document.addEventListener("click", function(e){
-    const card = e.target.closest(".pg-card");
-    if (card && card.dataset.id) { openModal(card.dataset.id); }
-  });
+    const modal = document.getElementById("productModal"), modalMain = document.getElementById("modalMainImg");
+    function openModal(id) {
+      const p = PRODUCTS[id]; if (!p) return;
+      document.getElementById("modalBadge").textContent = p.category;
+      document.getElementById("modalTitle").textContent = p.name;
+      document.getElementById("modalDesc").textContent = p.desc;
+      document.getElementById("modalSpecRows").innerHTML = p.specs.map(([k, v]) => `<div class="spec-row"><span class="spec-key">${k}</span><span class="spec-val">${v}</span></div>`).join("");
+      document.getElementById("modalTags").innerHTML = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join("");
+      modalMain.src = p.images[0]; modalMain.alt = p.name;
+      document.getElementById("modalThumbs").innerHTML = p.images.length > 1 ? p.images.map((src, i) => `<div class="modal-thumb ${i === 0 ? "active" : ""}" data-src="${src}"><img src="${src}" alt="View ${i + 1}"></div>`).join("") : "";
+      modal.classList.add("open"); document.body.classList.add("no-scroll");
+    }
+    // Expose globally so script.js delegated handler can call openModal on pg-card click
+    window.openModal = openModal;
+    // Open modal on card click (delegated via script.js handles close/thumbs)
+    document.addEventListener("click", function (e) {
+      const card = e.target.closest(".pg-card");
+      if (card && card.dataset.id) { openModal(card.dataset.id); }
+    });
   </script>
   <!-- script.js loads AFTER inline script so openModal is already defined -->
   <script src="script.js"></script>
 </body>
+
 </html>

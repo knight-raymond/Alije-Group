@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /* ── SIDEBAR ── */
   function openSidebar() {
     const sidebar = document.getElementById("sidebar");
-    const btn     = document.getElementById("openSidebar");
+    const btn = document.getElementById("openSidebar");
     if (!sidebar) return;
     sidebar.classList.add("open");
     sidebar.setAttribute("aria-hidden", "false");
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function closeSidebar() {
     const sidebar = document.getElementById("sidebar");
-    const btn     = document.getElementById("openSidebar");
+    const btn = document.getElementById("openSidebar");
     if (!sidebar) return;
     sidebar.classList.remove("open");
     sidebar.setAttribute("aria-hidden", "true");
@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.remove("no-scroll");
   }
 
-  const openBtn  = document.getElementById("openSidebar");
+  const openBtn = document.getElementById("openSidebar");
   const closeBtn = document.getElementById("closeSidebar");
-  if (openBtn)  openBtn.addEventListener("click", openSidebar);
+  if (openBtn) openBtn.addEventListener("click", openSidebar);
   if (closeBtn) closeBtn.addEventListener("click", closeSidebar);
 
   // Close sidebar on resize to desktop
