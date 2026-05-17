@@ -1,154 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Alije Group</title>
-    <meta name="description"
-        content="Get in touch with Alije Group for engineering goods export enquiries, pricing, and partnerships.">
-    <link rel="icon" type="image/x-icon" href="assets/logo/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script src="js/include.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Alije Group</title>
+  <meta name="description" content="Get in touch with Alije Group for engineering goods export enquiries, pricing, and partnerships.">
+  <link rel="icon" type="image/x-icon" href="assets/logo/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
-
 <body>
 
-    <div id="header"></div>
+  <!-- ══════════════════ HEADER ══════════════════ -->
+  <header id="site-header">
+    <div class="logo-container">
+      <a href="index.html">
+        <img class="logo" src="assets/logo/alije-logo-main.png" alt="Alije Group Logo">
+      </a>
+      <div class="company-text">
+        <h1>ALIJE</h1>
+        <p>GROUP</p>
+      </div>
+    </div>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="products.html">Gallery</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html" class="active-link">Contact Us</a>
+    </nav>
+    <button id="openSidebar" class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <aside id="sidebar" class="sidebar" aria-hidden="true" aria-label="Mobile navigation">
+    <span class="close-btn" id="closeSidebar" role="button" tabindex="0" aria-label="Close menu">&times;</span>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products Gallery</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html" class="active-link">Contact Us</a>
+  </aside>
 
-    <main>
+  <main>
 
-        <!-- Page Hero -->
-        <div class="page-hero">
-            <div class="section-label" style="color:rgba(255,255,255,0.7);margin-bottom:10px">Reach Out</div>
-            <h1>Contact Us</h1>
-            <p>We're here to help with product enquiries, pricing, documentation, and export support.</p>
+    <div class="page-hero">
+      <div class="section-label" style="color:rgba(255,255,255,0.7);margin-bottom:10px">Reach Out</div>
+      <h1>Contact Us</h1>
+      <p>We're here to help with product enquiries, pricing, documentation, and export support.</p>
+    </div>
+
+    <div class="about-body">
+
+      <p>At Alije Group, we are committed to building strong global partnerships. Whether you have a product enquiry, need a quotation, or want to discuss long-term supply requirements, we're here to assist.</p>
+
+      <h2>Get In Touch</h2>
+      <div class="contact-info-grid">
+        <div class="contact-info-card">
+          <div class="info-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:enterprisesalije@gmail.com">enterprisesalije@gmail.com</a>
+          </div>
         </div>
-
-        <div class="about-body">
-
-            <p>At Alije Group, we are committed to building strong global partnerships by providing high-quality
-                engineering goods and reliable export services. Whether you have a product enquiry, need a quotation, or
-                want to discuss long-term supply requirements, we are here to assist you.</p>
-
-            <!-- Contact Info Cards -->
-            <h2>Get In Touch</h2>
-            <div class="contact-info-grid">
-                <div class="contact-info-card">
-                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                    <div>
-                        <h4>Email</h4>
-                        <a href="mailto:enterprisesalije@gmail.com">enterprisesalije@gmail.com</a>
-                    </div>
-                </div>
-                <div class="contact-info-card">
-                    <div class="info-icon"><i class="fas fa-phone"></i></div>
-                    <div>
-                        <h4>Phone</h4>
-                        <a href="tel:+918476016955">(+91) 84760 16955</a>
-                    </div>
-                </div>
-                <div class="contact-info-card">
-                    <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
-                    <div>
-                        <h4>WhatsApp</h4>
-                        <a href="https://wa.me/918476016955" target="_blank" rel="noopener">Message us on WhatsApp</a>
-                    </div>
-                </div>
-                <div class="contact-info-card">
-                    <div class="info-icon"><i class="fas fa-clock"></i></div>
-                    <div>
-                        <h4>Business Hours</h4>
-                        <p>Mon – Sat: 9:00 AM – 7:00 PM<br>Sunday: Closed</p>
-                    </div>
-                </div>
-            </div>
-
-            <h2>Why Contact Us</h2>
-            <div class="features" style="margin-top:24px">
-                <div class="feature-card">
-                    <img src="assets/icons/ic-feat/FEATURE-ICON-002.png" alt="Fast Response">
-                    <h3>Fast Response &amp; Professional Support</h3>
-                    <p>Quick replies and expert assistance for all your queries.</p>
-                </div>
-                <div class="feature-card">
-                    <img src="assets/icons/ic-feat/FEATURE-ICON-003.png" alt="Global Export">
-                    <h3>Global Export Assistance</h3>
-                    <p>Guidance on shipping, documentation, and smooth international delivery.</p>
-                </div>
-                <div class="feature-card">
-                    <img src="assets/icons/ic-feat/FEATURE-ICON-004.png" alt="Product Details">
-                    <h3>Pricing &amp; Documentation Support</h3>
-                    <p>Clear product specifications, fair pricing, and complete export paperwork.</p>
-                </div>
-                <div class="feature-card">
-                    <img src="assets/icons/ic-feat/FEATURE-ICON-005.png" alt="Customized Solutions">
-                    <h3>Customized Solutions for Bulk Orders</h3>
-                    <p>Flexible supply options tailored for large or ongoing requirements.</p>
-                </div>
-            </div>
-
-            <!-- Enquiry form included on contact page too -->
-            <h2 style="margin-top:50px">Send Us a Message</h2>
-            <p style="margin-bottom:0">Or use the <a href="index.html#enquiry"
-                    style="color:var(--clr-primary);font-weight:600">Trade Enquiry form</a> on our homepage to get
-                started.</p>
-
+        <div class="contact-info-card">
+          <div class="info-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <h4>Phone</h4>
+            <a href="tel:+918476016955">(+91) 84760 16955</a>
+          </div>
         </div>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-box">
-                <h4>About Us</h4>
-                <p>Alije Group is a trusted sourcing company providing high-quality engineering goods from India to
-                    global clients.</p>
-            </div>
-            <div class="footer-box">
-                <h4>Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products Gallery</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-box">
-                <h4>Contact</h4>
-                <p><i class="fas fa-envelope" style="color:#60a5fa;margin-right:6px"></i> enterprisesalije@gmail.com</p>
-                <p><i class="fas fa-phone" style="color:#60a5fa;margin-right:6px"></i> +91 84760 16955</p>
-                <p><i class="fas fa-map-marker-alt" style="color:#60a5fa;margin-right:6px"></i> India</p>
-            </div>
-            <div class="footer-box">
-                <h4>Follow Us</h4>
-                <div class="footer-social">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
+        <div class="contact-info-card">
+          <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+          <div>
+            <h4>WhatsApp</h4>
+            <a href="https://wa.me/918476016955" target="_blank" rel="noopener">Message us on WhatsApp</a>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <span>© 2026 Alije Group. All rights reserved.</span>
-            <span>Made with <i class="fas fa-heart" style="color:#ef4444"></i> in India</span>
+        <div class="contact-info-card">
+          <div class="info-icon"><i class="fas fa-clock"></i></div>
+          <div>
+            <h4>Business Hours</h4>
+            <p>Mon – Sat: 9:00 AM – 7:00 PM<br>Sunday: Closed</p>
+          </div>
         </div>
-    </footer>
+      </div>
 
-    <button id="scrollTop" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+      <h2>Why Contact Us</h2>
+      <div class="features" style="margin-top:24px">
+        <div class="feature-card">
+          <img src="assets/icons/ic-feat/FEATURE-ICON-002.png" alt="Fast Response">
+          <h3>Fast Response &amp; Professional Support</h3>
+          <p>Quick replies and expert assistance for all your enquiries.</p>
+        </div>
+        <div class="feature-card">
+          <img src="assets/icons/ic-feat/FEATURE-ICON-003.png" alt="Global Export">
+          <h3>Global Export Assistance</h3>
+          <p>Guidance on shipping, documentation, and smooth international delivery.</p>
+        </div>
+        <div class="feature-card">
+          <img src="assets/icons/ic-feat/FEATURE-ICON-004.png" alt="Pricing">
+          <h3>Pricing &amp; Documentation Support</h3>
+          <p>Clear product specifications, fair pricing, and complete export paperwork.</p>
+        </div>
+        <div class="feature-card">
+          <img src="assets/icons/ic-feat/FEATURE-ICON-005.png" alt="Bulk Orders">
+          <h3>Customised Solutions for Bulk Orders</h3>
+          <p>Flexible supply options tailored for large or ongoing requirements.</p>
+        </div>
+      </div>
 
-    <script src="enquiry.js"></script>
-    <script src="script.js"></script>
+      <!-- Enquiry Form -->
+      <h2 style="margin-top:50px">Send Us a Message</h2>
+      <section class="enquiry-section" id="enquiry" aria-labelledby="contact-enquiry-heading" style="max-width:100%;margin:24px 0 0;border-radius:var(--radius-md)">
+        <h2 id="contact-enquiry-heading" style="display:none">Trade Enquiry</h2>
+        <div class="enquiry-notice">
+          <i class="fas fa-info-circle"></i>
+          We are seeking serious buyers genuinely interested in doing business with us.
+        </div>
+        <form class="enquiry-form" id="enquiryForm" novalidate>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Full Name" autocomplete="name">
+            <small class="error" id="nameError">This field is required</small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email">
+            <small class="error" id="emailError">This field is required</small>
+          </div>
+          <div class="form-group">
+            <label for="phone">WhatsApp Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" placeholder="Your Country" autocomplete="country-name">
+            <small class="error" id="countryError">This field is required</small>
+          </div>
+          <div class="form-group message-box">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Describe the products you need, quantity, any specific requirements…"></textarea>
+            <small class="error" id="messageError">This field is required</small>
+          </div>
+          <button class="enquiry-btn" type="submit" id="emailBtn">
+            <i class="fas fa-envelope"></i> Send Enquiry via Email
+          </button>
+          <button class="enquiry-btn-wa" type="button" id="whatsappBtn">
+            <i class="fab fa-whatsapp"></i> Send via WhatsApp
+          </button>
+        </form>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Popups -->
+  <div class="popup-overlay" id="thankYouPopup" role="dialog" aria-modal="true" aria-labelledby="popup-ty-title">
+    <div class="popup-popup">
+      <div class="popup-icon"><i class="fas fa-check"></i></div>
+      <h2 id="popup-ty-title">Thank You!</h2>
+      <p>Your enquiry has been received. We'll be in touch shortly.</p>
+      <button class="popup-ok-btn" onclick="closePopup()">OK</button>
+    </div>
+  </div>
+  <div class="popup-overlay" id="whatsappPopup" role="dialog" aria-modal="true" aria-labelledby="popup-wa-title">
+    <div class="popup-popup">
+      <div class="popup-icon" style="background:#25D366"><i class="fab fa-whatsapp"></i></div>
+      <h2 id="popup-wa-title">Redirecting…</h2>
+      <p>Opening WhatsApp to send your enquiry. Thank you!</p>
+      <button class="popup-ok-btn" onclick="closeWhatsappPopup()">OK</button>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-box">
+        <h4>About Us</h4>
+        <p>Alije Group is a trusted sourcing company providing high-quality engineering goods from India to global clients.</p>
+      </div>
+      <div class="footer-box">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h4>Contact</h4>
+        <p><i class="fas fa-envelope" style="color:#60a5fa;margin-right:6px"></i> enterprisesalije@gmail.com</p>
+        <p><i class="fas fa-phone" style="color:#60a5fa;margin-right:6px"></i> +91 84760 16955</p>
+        <p><i class="fas fa-map-marker-alt" style="color:#60a5fa;margin-right:6px"></i> India</p>
+      </div>
+      <div class="footer-box">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Alije Group. All rights reserved.</span>
+      <span>Made with <i class="fas fa-heart" style="color:#ef4444"></i> in India</span>
+    </div>
+  </footer>
+  <button id="scrollTop" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="enquiry.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
