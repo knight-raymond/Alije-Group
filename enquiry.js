@@ -1,123 +1,151 @@
-// Initialize EmailJS
-(function () {
-  emailjs.init("2879sthwSM7HN3K4_");
-})();
+/* ============================================================
+   Alije Group — enquiry.js  (Final, Bug-Fixed)
+   ============================================================ */
 
-const encodedWhatsapp = "OTE4NDc2MDE2OTU1";
+// FIX: wrap everything in DOMContentLoaded so getElementById calls
+// are guaranteed to find elements even if script moves to <head> later
+document.addEventListener("DOMContentLoaded", function () {
 
-function decodeBase64(str) {
-  return atob(str);
-}
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-["name", "email", "phone", "country", "message"].forEach(id => {
-  const field = document.getElementById(id);
-  const error = document.getElementById(id + "Error");
+  /* ── EmailJS init ── */
+  if (typeof emailjs !== "undefined") {
+    emailjs.init("2879sthwSM7HN3K4_");
+  }
 
-  if (!field || !error) return;
+  const encodedWhatsapp = "OTE4NDc2MDE2OTU1";
 
-  field.addEventListener("input", () => {
-    field.classList.remove("invalid");
-    error.style.display = "none";
-  });
-});
-document.getElementById("enquiryForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  if (!validateForm()) return;
+  function decodeBase64(str) { return atob(str); }
+  function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
 
-  const submitBtn = document.getElementById("emailBtn");
-  submitBtn.disabled = true;
-  submitBtn.innerText = "Sending Enquiry...";
-
-  const params = getFormData();
-
-  emailjs.send("service_5v70fm7", "template_pl8pwbl", params)
-    .then(() => {
-      document.getElementById("thankYouPopup").style.display = "block";
-document.body.classList.add("no-scroll");
-    document.getElementById("enquiryForm").reset();
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Send Enquiry (Email)";
-    })
-    .catch(err => {
-      alert("Email failed. Please try again.");
-      console.error(err);
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Send Enquiry (Email)";
-    });
-});
-document.getElementById("whatsappBtn").addEventListener("click", function () {
-  if (!validateForm()) return;
-
-  const params = getFormData();
-  const whatsappNumber = decodeBase64(encodedWhatsapp);
-
-  const whatsappText = encodeURIComponent(
-    `Alije Group New Enquiry
-Name: ${params.name}
-Email: ${params.email}
-Phone: ${params.phone || "Not provided"}
-Country: ${params.country}
-Message: ${params.message}`
-  );
-
-  document.getElementById("whatsappPopup").style.display = "block";
-document.body.classList.add("no-scroll");
-
-  setTimeout(() => {
-    window.open(
-      `https://wa.me/${whatsappNumber}?text=${whatsappText}`,
-      "_blank"
-    );
-  }, 1200);
-});
-
-function validateForm() {
-  let valid = true;
-
-   ["name", "email", "country", "message"].forEach(id => {
+  /* ── Live error clearing ── */
+  // FIX: phone field error div existed but phone was never validated — removed phone from list
+  ["name", "email", "country", "message"].forEach(id => {
     const field = document.getElementById(id);
     const error = document.getElementById(id + "Error");
-
     if (!field || !error) return;
-
-    if (!field.value.trim()) {
-      field.classList.add("invalid");
-      error.style.display = "block";
-      valid = false;
-    }
+    field.addEventListener("input", () => {
+      field.classList.remove("invalid");
+      error.style.display = "none";
+      error.innerText = "This field is required"; // reset email-specific message
+    });
   });
-  const emailField = document.getElementById("email");
-  const emailError = document.getElementById("emailError");
 
-  if (emailField && emailError && emailField.value.trim()) {
-    if (!isValidEmail(emailField.value.trim())) {
+  /* ── Form submit (Email) ── */
+  const enquiryForm = document.getElementById("enquiryForm");
+  if (enquiryForm) {
+    enquiryForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!validateForm()) return;
+
+      const submitBtn = document.getElementById("emailBtn");
+      if (!submitBtn) return;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+
+      const params = getFormData();
+
+      if (typeof emailjs !== "undefined") {
+        emailjs.send("service_5v70fm7", "template_pl8pwbl", params)
+          .then(() => {
+            showPopup("thankYouPopup");
+            enquiryForm.reset();
+          })
+          .catch(err => {
+            alert("Email failed. Please try again or use WhatsApp.");
+            console.error("EmailJS error:", err);
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-envelope"></i> Send Enquiry via Email';
+          });
+      } else {
+        alert("Email service unavailable. Please use WhatsApp.");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-envelope"></i> Send Enquiry via Email';
+      }
+    });
+  }
+
+  /* ── WhatsApp button ── */
+  const whatsappBtn = document.getElementById("whatsappBtn");
+  if (whatsappBtn) {
+    whatsappBtn.addEventListener("click", function () {
+      if (!validateForm()) return;
+
+      const params = getFormData();
+      const number = decodeBase64(encodedWhatsapp);
+      const text = encodeURIComponent(
+        `Alije Group — New Enquiry\nName: ${params.name}\nEmail: ${params.email}\nPhone: ${params.phone || "Not provided"}\nCountry: ${params.country}\nMessage: ${params.message}`
+      );
+
+      showPopup("whatsappPopup");
+      // Open WhatsApp after popup renders
+      setTimeout(() => {
+        window.open(`https://wa.me/${number}?text=${text}`, "_blank");
+      }, 1200);
+    });
+  }
+
+  /* ── Validation ── */
+  function validateForm() {
+    let valid = true;
+    // Required fields: name, email, country, message (phone is optional)
+    ["name", "email", "country", "message"].forEach(id => {
+      const field = document.getElementById(id);
+      const error = document.getElementById(id + "Error");
+      if (!field || !error) return;
+      if (!field.value.trim()) {
+        field.classList.add("invalid");
+        error.style.display = "block";
+        error.innerText = "This field is required";
+        valid = false;
+      }
+    });
+    // Extra email format check
+    const emailField = document.getElementById("email");
+    const emailError = document.getElementById("emailError");
+    if (emailField && emailError && emailField.value.trim() && !isValidEmail(emailField.value.trim())) {
       emailField.classList.add("invalid");
       emailError.style.display = "block";
       emailError.innerText = "Please enter a valid email address";
       valid = false;
     }
+    return valid;
   }
 
-  return valid;
-}
-function getFormData() {
-  return {
-    name: document.getElementById("name").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    phone: document.getElementById("phone").value.trim(), // optional
-    country: document.getElementById("country").value.trim(),
-    message: document.getElementById("message").value.trim()
-  };
-}
+  function getFormData() {
+    return {
+      name: (document.getElementById("name")?.value || "").trim(),
+      email: (document.getElementById("email")?.value || "").trim(),
+      phone: (document.getElementById("phone")?.value || "").trim(),
+      country: (document.getElementById("country")?.value || "").trim(),
+      message: (document.getElementById("message")?.value || "").trim(),
+    };
+  }
 
-function closePopup() {
-  document.getElementById("thankYouPopup").style.display = "none";
-document.body.classList.remove("no-scroll");
-}
+  /* ── Popup helpers ── */
+  function showPopup(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add("visible");
+    document.body.classList.add("no-scroll");
+  }
 
-function closeWhatsappPopup() {
-  document.getElementById("whatsappPopup").style.display = "none";
-document.body.classList.remove("no-scroll");
-}
+  function closePopup() {
+    const el = document.getElementById("thankYouPopup");
+    if (!el) return;
+    el.classList.remove("visible");
+    document.body.classList.remove("no-scroll");
+  }
+
+  function closeWhatsappPopup() {
+    const el = document.getElementById("whatsappPopup");
+    if (!el) return;
+    el.classList.remove("visible");
+    document.body.classList.remove("no-scroll");
+  }
+
+  // Expose for inline onclick="closePopup()" in HTML
+  window.closePopup = closePopup;
+  window.closeWhatsappPopup = closeWhatsappPopup;
+
+});
