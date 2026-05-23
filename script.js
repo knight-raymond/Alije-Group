@@ -54,20 +54,39 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.innerWidth > 920) closeSidebar();
   });
 
-  /* ── ACTIVE NAV LINK (dynamic — works on any host/protocol) ── */
-  // FIX: was defaulting to "index.html" when pathname was empty (some file:// servers)
-  // Now also handles trailing slash and index.html equivalence
-  const rawPage = location.pathname.split("/").pop() || "";
-  const current = rawPage === "" || rawPage === "index.html" ? "index.html" : rawPage.toLowerCase();
-  document.querySelectorAll(".nav-links a, .sidebar a").forEach(a => {
-    const rawHref = (a.getAttribute("href") || "").split("/").pop().split("#")[0].toLowerCase();
-    const href = rawHref === "" ? "index.html" : rawHref;
-    // Toggle: add active if match, remove if not — respects hardcoded class too
-    if (href === current) {
-      a.classList.add("active-link");
+  /* ── ACTIVE NAV LINK (for ../folder/ style links) ── */
+
+  const currentPath = window.location.pathname
+    .replace(/\/$/, "") // remove trailing slash
+    .toLowerCase();
+
+  document.querySelectorAll(".nav-links a, .sidebar a").forEach(link => {
+
+    const linkPath = new URL(link.getAttribute("href"), window.location.href)
+      .pathname
+      .replace(/\/$/, "")
+      .toLowerCase();
+
+    // Homepage match
+    const isHomePage =
+      currentPath === "" ||
+      currentPath === "/" ||
+      currentPath.endsWith("/index.html");
+
+    const isHomeLink =
+      linkPath === "" ||
+      linkPath === "/" ||
+      linkPath.endsWith("/index.html");
+
+    if (
+      (isHomePage && isHomeLink) ||
+      (!isHomePage && currentPath === linkPath)
+    ) {
+      link.classList.add("active-link");
     } else {
-      a.classList.remove("active-link");
+      link.classList.remove("active-link");
     }
+
   });
 
   /* ── FAQ ACCORDION ── */
