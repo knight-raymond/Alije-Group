@@ -1,5 +1,5 @@
 /* ============================================================
-   ALIJE GROUP — styles.css  (Improved & Bug-Fixed)
+   ALIJE GROUP — styles.css  for version 2.X.X
    ============================================================ */
 
 /* ── CSS Variables ── */
@@ -63,8 +63,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
-/* ── Google Fonts (loaded from link tags) ── */
 
 /* ── HEADER ── */
 header {
@@ -1358,9 +1356,7 @@ textarea {
   text-align: center;
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* ── MEDIA QUERIES ── */
 
 @media (max-width: 1024px) {
   .intro-grid {
@@ -1492,7 +1488,7 @@ textarea {
   }
 }
 
-/* ===== CATEGORY CARDS (index products section) ===== */
+/* ===== CATEGORY CARDS ===== */
 .cat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

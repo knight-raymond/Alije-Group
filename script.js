@@ -1,5 +1,5 @@
 /* ============================================================
-   Alije Group — script.js  (Final, Bug-Fixed)
+   Alije Group — script.js for version 2.X.X
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -145,7 +145,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ── SCROLL-REVEAL ANIMATION ── */
-  // FIX: capped stagger delay so last card never waits >0.5s
   if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -160,7 +159,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(
       ".card, .feature-card, .faq-item, .mission-card, .contact-info-card, .cat-card, .infra-card, .pg-card"
     ).forEach((el, i) => {
-      // FIX: cap delay at 0.4s so last of 38 cards doesn't wait 2.6s
       const delay = Math.min(i * 0.06, 0.4);
       el.style.opacity = "0";
       el.style.transform = "translateY(24px)";
@@ -190,7 +188,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ── PRODUCTS PAGE: read category from URL hash ── */
-  // FIX: was using sessionStorage (unreliable) — now uses location.hash
   const hash = location.hash.replace("#", "").trim();
   if (hash && document.querySelector(`.filter-btn[data-cat="${hash}"]`)) {
     applyFilter(hash);

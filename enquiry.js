@@ -1,5 +1,5 @@
 /* ============================================================
-   Alije Group — enquiry.js  (Final, Bug-Fixed)
+   Alije Group — enquiry.js for version 2.X.X
    ============================================================ */
 
 // FIX: wrap everything in DOMContentLoaded so getElementById calls
